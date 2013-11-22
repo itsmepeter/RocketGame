@@ -30,7 +30,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:background="@color/ButtonBackgroundColor"
-        android:onClick="onClickStart"
         android:text="Start" />
 
     <Button
