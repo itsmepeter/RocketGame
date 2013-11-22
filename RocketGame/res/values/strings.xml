@@ -7,5 +7,6 @@
     <color name="MenuBackgroundColor">#0099FF</color>
     <string name="GameName">420 ROCKET BLAZE IT</string>
     <color name="MenuHeaderBackgroundColor">#FF1919</color>
+    <color name="ButtonBackgroundColor">#424242</color>
 
 </resources>

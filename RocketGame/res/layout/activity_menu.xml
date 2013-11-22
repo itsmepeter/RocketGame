@@ -2,24 +2,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/MenuBackgroundColor"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MenuActivity"
-    android:background="@color/MenuBackgroundColor"
-    >
+    tools:context=".MenuActivity" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="55dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/MenuHeaderBackgroundColor"
         android:gravity="center_horizontal"
+        android:paddingTop="60dp"
         android:text="@string/GameName"
         android:textSize="40sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:background="@color/ButtonBackgroundColor"
+        android:text="Start" />
+
+    <Button
+        android:id="@+id/btnOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnStart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@color/ButtonBackgroundColor"
+        android:text="Options" />
+
+    <Button
+        android:id="@+id/btnAchievements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnOptions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:background="@color/ButtonBackgroundColor"
+        android:text="Achievements" />
+
+    <Button
+        android:id="@+id/btnHighScores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAchievements"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@color/ButtonBackgroundColor"
+        android:text="HighScores" />
 
 </RelativeLayout>

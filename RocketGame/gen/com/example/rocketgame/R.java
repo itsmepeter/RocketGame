@@ -11,6 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int ButtonBackgroundColor=0x7f060002;
         public static final int MenuBackgroundColor=0x7f060000;
         public static final int MenuHeaderBackgroundColor=0x7f060001;
     }
@@ -28,7 +29,12 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090000;
+        public static final int action_settings=0x7f090005;
+        public static final int btnAchievements=0x7f090003;
+        public static final int btnHighScores=0x7f090004;
+        public static final int btnOptions=0x7f090002;
+        public static final int btnStart=0x7f090001;
+        public static final int textView1=0x7f090000;
     }
     public static final class layout {
         public static final int activity_menu=0x7f030000;
