@@ -21,7 +21,7 @@ public class MenuActivity extends Activity {
         return true;
     }
     
-    public void onClickStart(){
+    public void onClickStart(View view){
     	setContentView(R.layout.activity_shop);
     }
     
