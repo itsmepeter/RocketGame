@@ -38,6 +38,7 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_menu=0x7f030000;
+        public static final int activity_shop=0x7f030001;
     }
     public static final class menu {
         public static final int menu=0x7f080000;
