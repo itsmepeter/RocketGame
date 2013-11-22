@@ -13,6 +13,39 @@
         android:layout_marginLeft="22dp"
         android:layout_marginTop="17dp"
         android:text="Shop"
-        android:textSize="20dp" />
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="120dp"
+        android:text="Upgrades"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnShopBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="14dp"
+        android:background="@color/MenuHeaderBackgroundColor"
+        android:text="BACK" />
+
+    <Button
+        android:id="@+id/btnShopStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnShopBack"
+        android:layout_alignBottom="@+id/btnShopBack"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="17dp"
+        android:background="@color/MenuHeaderBackgroundColor"
+        android:text="START" />
 
 </RelativeLayout>
