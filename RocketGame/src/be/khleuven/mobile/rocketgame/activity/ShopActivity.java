@@ -1,9 +1,10 @@
 package be.khleuven.mobile.rocketgame.activity;
 
-import com.example.rocketgame.R;
+import be.khleuven.mobile.rocketgame.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
@@ -24,7 +25,8 @@ public class ShopActivity extends Activity {
     }
     
     public void onClickBack(View view){
-    	setContentView(R.layout.activity_menu);
+		Intent myIntent = new Intent(view.getContext(), MenuActivity.class);
+		startActivityForResult(myIntent, 0);
     }
     
 }
