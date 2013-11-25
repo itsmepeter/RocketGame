@@ -31,7 +31,7 @@
         android:layout_marginTop="22dp"
         android:background="@color/ButtonBackgroundColor"
         android:onClick="onClickStart"
-        android:text="Start" />
+        android:text="@string/start" />
 
     <Button
         android:id="@+id/btnOptions"
@@ -41,7 +41,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@color/ButtonBackgroundColor"
-        android:text="Options" />
+        android:text="@string/options" />
 
     <Button
         android:id="@+id/btnAchievements"
@@ -51,7 +51,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:background="@color/ButtonBackgroundColor"
-        android:text="Achievements" />
+        android:text="@string/achievements" />
 
     <Button
         android:id="@+id/btnHighScores"
@@ -61,6 +61,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="@color/ButtonBackgroundColor"
-        android:text="HighScores" />
+        android:text="@string/highscores" />
 
 </RelativeLayout>

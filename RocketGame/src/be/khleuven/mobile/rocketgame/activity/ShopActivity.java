@@ -1,16 +1,18 @@
-package com.example.rocketgame;
+package be.khleuven.mobile.rocketgame.activity;
+
+import com.example.rocketgame.R;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 
-public class MenuActivity extends Activity {
+public class ShopActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_shop);
     }
 
 
@@ -21,8 +23,8 @@ public class MenuActivity extends Activity {
         return true;
     }
     
-    public void onClickStart(View view){
-    	setContentView(R.layout.activity_shop);
+    public void onClickBack(View view){
+    	setContentView(R.layout.activity_menu);
     }
     
 }

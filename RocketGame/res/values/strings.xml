@@ -6,6 +6,13 @@
     <string name="hello_world">Hello world!</string>
     <color name="MenuBackgroundColor">#0099FF</color>
     <string name="GameName">420 ROCKET BLAZE IT</string>
+    <string name="start">Start</string>
+    <string name="options">Options</string>
+    <string name="achievements">Achievements</string>
+    <string name="highscores">Highscores</string>
+    <string name="back">Back</string>
+    <string name="shop">Shop</string>
+    <string name="upgrades">Upgrades</string>
     <color name="MenuHeaderBackgroundColor">#FF1919</color>
     <color name="ButtonBackgroundColor">#424242</color>
 

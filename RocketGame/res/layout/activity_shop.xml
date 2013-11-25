@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="22dp"
         android:layout_marginTop="17dp"
-        android:text="Shop"
+        android:text="@string/shop"
         android:textSize="40sp"
         android:textStyle="bold" />
 
@@ -23,7 +23,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="120dp"
-        android:text="Upgrades"
+        android:text="@string/upgrades"
         android:textSize="40sp"
         android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
         android:layout_marginBottom="14dp"
         android:background="@color/MenuHeaderBackgroundColor"
         android:onClick="onClickBack"
-        android:text="BACK" />
+        android:text="@string/back" />
 
     <Button
         android:id="@+id/btnShopStart"
@@ -47,6 +47,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="17dp"
         android:background="@color/MenuHeaderBackgroundColor"
-        android:text="START" />
+        android:text="@string/start" />
 
 </RelativeLayout>
