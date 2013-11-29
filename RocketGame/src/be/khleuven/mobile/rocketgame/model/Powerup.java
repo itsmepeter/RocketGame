@@ -2,41 +2,42 @@ package be.khleuven.mobile.rocketgame.model;
 
 import android.graphics.Bitmap;
 
-public class Upgrade {
-	private int price;
-	private Bitmap image;
+public class Powerup extends SpaceObject{
 	private int speedmodifier;
 	private int rotationmodifier;
-	
-	private Upgrade(int price, Bitmap image, int speedmodifier, int rotationmodifier){
-		setPrice(price);
-		setImage(image);
+	private int duration;
+
+	public Powerup(int x, int y, Bitmap image, int width, int speedmodifier, int rotationmodifier) {
+		super(x, y, image, width);
 		setSpeedmodifier(speedmodifier);
 		setRotationmodifier(rotationmodifier);
 	}
-	
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public Bitmap getImage() {
-		return image;
-	}
-	public void setImage(Bitmap image) {
-		this.image = image;
-	}
+
 	public int getSpeedmodifier() {
 		return speedmodifier;
 	}
+
 	public void setSpeedmodifier(int speedmodifier) {
 		this.speedmodifier = speedmodifier;
 	}
+
 	public int getRotationmodifier() {
 		return rotationmodifier;
 	}
+
 	public void setRotationmodifier(int rotationmodifier) {
 		this.rotationmodifier = rotationmodifier;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) throws Exception {
+		if(duration < 0){
+			throw new Exception("duration needs to be positive");
+		}else{
+			this.duration = duration;
+		}
 	}
 }
