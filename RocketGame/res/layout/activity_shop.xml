@@ -47,6 +47,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="17dp"
         android:background="@color/MenuHeaderBackgroundColor"
+        android:onClick="onClickStart"
         android:text="@string/start" />
 
 </RelativeLayout>

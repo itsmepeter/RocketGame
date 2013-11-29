@@ -29,4 +29,9 @@ public class ShopActivity extends Activity {
 		startActivityForResult(myIntent, 0);
     }
     
+	public void onClickStart(View view) {
+		Intent myIntent = new Intent(view.getContext(), GameActivity.class);
+		startActivityForResult(myIntent, 0);
+	}
+    
 }
