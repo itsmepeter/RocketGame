@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -18,6 +20,7 @@ public class GameView extends View {
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs, 0);
+		//bmprocket = BitmapFactory.decodeResource(getResources(), R.drawable.rocket);     
 	}
 
 	@Override
@@ -25,18 +28,20 @@ public class GameView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
 		canvasbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); 
 		canvas = new Canvas(canvasbitmap); 
-		bmprocket = BitmapFactory.decodeResource(getResources(), R.drawable.rocket);     
+
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);		
-		canvas.drawColor(Color.BLACK);
+		canvas.drawColor(Color.BLUE);
+		
+		canvas.drawRect(new Rect(0,0,20,20), new Paint(Color.BLACK));
 		drawRocket();
         invalidate();
 	}	
 	
 	public void drawRocket(){
-        canvas.drawBitmap(bmprocket, 50, 50, null);  
+        //canvas.drawBitmap(bmprocket, 50, 50, null);  
 	}
 }
