@@ -17,6 +17,9 @@ public class GameView extends View {
     private Canvas canvas;
     private Bitmap canvasbitmap;
     private Bitmap bmprocket;
+    
+    private int width;
+    private int height;
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs, 0);
@@ -28,15 +31,24 @@ public class GameView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
 		canvasbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); 
 		canvas = new Canvas(canvasbitmap); 
+		height = h;
+		width = w;
 
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);		
-		canvas.drawColor(Color.BLUE);
-		
+		canvas.drawColor(Color.BLUE);	
 		canvas.drawRect(new Rect(0,0,20,20), new Paint(Color.BLACK));
+		
+		
+		Paint p=new Paint();
+        Bitmap b=BitmapFactory.decodeResource(getResources(), R.drawable.rocket);
+        p.setColor(Color.RED);
+        canvas.drawBitmap(b, (width/2) - b.getWidth()/2, height-b.getHeight(), p);
+        
+        
 		drawRocket();
         invalidate();
 	}	
