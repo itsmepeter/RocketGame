@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.hardware.Sensor;
@@ -78,14 +79,24 @@ public class GameView extends View implements SensorEventListener {
 		p=new Paint();
         bmprocket =BitmapFactory.decodeResource(getResources(), R.drawable.rocket);
         p.setColor(Color.RED);
-        
+
 		//eerste run
 		if(rocket.getY() == 0){
+	        Log.v("000",rocket.getX() + " " + rocket.getY());
 			rocket.setX((width/2) - bmprocket.getWidth()/2);
 			rocket.setY(height-bmprocket.getHeight());
 		}
         rocket.updatePosition(accelerometerX, accelerometerY, accelerometerZ, accelerometerEventTijd);
-        canvas.drawBitmap(bmprocket, rocket.getX(), rocket.getY(), p);
+        //angle racket juistzetten
+        Matrix rotator = new Matrix();
+        int x = rocket.getX();
+        int y = rocket.getY();
+        rotator.postRotate(rocket.getRotationspeed(), x, y);
+        rotator.setTranslate(x, y);
+        
+        canvas.drawBitmap(bmprocket, rotator, p);
+        //canvas.drawBitmap(bmprocket, rocket.getX(), rocket.getY(), p);
+//		Log.v("000",rocket.getRotation()+ " ");
        
         invalidate();
 	}	
@@ -98,7 +109,7 @@ public class GameView extends View implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		Log.v("000","0000000000" + event);
+
 		  if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
 	        	switch (display.getRotation()) {
 	    		case Surface.ROTATION_0:

@@ -8,12 +8,12 @@ public class Rocket {
 	private int speed;
 	private float speedx;
 	private int rotation;
-	private int rotationspeed;
+	private float rotationspeed;
 	private int health;
 	private ArrayList<Upgrade> upgrades;
 	
 	public Rocket(){
-		
+		rotation = 0;
 	}
 	
 	public int getX() {
@@ -66,11 +66,11 @@ public class Rocket {
 		this.upgrades = upgrades;
 	}
 
-	public int getRotationspeed() {
+	public float getRotationspeed() {
 		return rotationspeed;
 	}
 
-	public void setRotationspeed(int rotationspeed) {
+	public void setRotationspeed(float rotationspeed) {
 		this.rotationspeed = rotationspeed;
 	}
 
@@ -84,8 +84,9 @@ public class Rocket {
 	
 	public void updatePosition(float sx, float sy, float sz, long timestamp){
 		float seconden = (System.nanoTime() - timestamp) / 1000000000.0f;
-		speedx = -sx * seconden * 4;
+		rotationspeed = -sx * seconden * 4;
 		
-		x += speedx * seconden;
+		//x += speedx * seconden;
+		rotation += rotation + rotationspeed * seconden;
 	}
 }
