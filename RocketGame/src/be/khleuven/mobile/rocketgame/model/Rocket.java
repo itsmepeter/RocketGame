@@ -6,6 +6,7 @@ public class Rocket {
 	private int x;
 	private int y;
 	private int speed;
+	private float speedx;
 	private int rotation;
 	private int rotationspeed;
 	private int health;
@@ -34,6 +35,13 @@ public class Rocket {
 		this.speed = speed;
 	}
 	
+	public float getSpeedX(){
+		return speedx;
+	}
+	
+	public void setSpeedX(float speedx){
+		this.speedx = speedx;
+	}
 	public void addUpgrade(Upgrade upgrade){
 		upgrades.add(upgrade);
 	}
@@ -72,5 +80,12 @@ public class Rocket {
 
 	public void setHealth(int health) {
 		this.health = health;
+	}
+	
+	public void updatePosition(float sx, float sy, float sz, long timestamp){
+		float seconden = (System.nanoTime() - timestamp) / 1000000000.0f;
+		speedx = -sx * seconden * 4;
+		
+		x += speedx * seconden;
 	}
 }

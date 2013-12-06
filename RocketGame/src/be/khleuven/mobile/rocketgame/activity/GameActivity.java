@@ -13,6 +13,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         gameview = (GameView)findViewById(R.id.gameActivity1);
+        gameview.startSpel();
     }
     
    public void initialiseerImages(){
