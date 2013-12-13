@@ -1,8 +1,7 @@
 package be.khleuven.mobile.rocketgame.view;
 
-
 import be.khleuven.mobile.rocketgame.R;
-import be.khleuven.mobile.rocketgame.model.Rocket;
+import be.khleuven.mobile.rocketgame.model.RocketGame;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,137 +9,92 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Display;
-import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
 
-public class GameView extends View implements SensorEventListener {
-	
-    private Canvas canvas;
-    private Bitmap canvasbitmap;
-    private Bitmap bmprocket;
-    
-    //accelerometer
-	private SensorManager sm;
-	private Sensor accelerometer;	
-    private float accelerometerX;
-    private float accelerometerY;
-    private float accelerometerZ;
-    private long accelerometerEventTijd;
-	private Display display;
-	
-	//Rocket
-	private Rocket rocket;
-    
-    private int width;
-    private int height;
-    
-    
-    //paints
-    private Paint p;
+public class GameView extends View {
+
+	private Bitmap canvasbitmap;
+	public Bitmap bmprocket;
+
+	// Rocket
+	public RocketGame rocketgame;
+
+	private int width;
+	private int height;
+
+	public Matrix rotator;
+
+	// paints
+	private Paint p;
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs, 0);
+
+		p = new Paint();
+		rocketgame = new RocketGame();
+
 		
-		WindowManager mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		display = mWindowManager.getDefaultDisplay();
-		//initialiseer accelerometer en sensormanager
-		sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-		accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);  
-		
+		bmprocket = BitmapFactory.decodeResource(getResources(),
+				R.drawable.fullrocket);
+		rotator = new Matrix();
+
 	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-		canvasbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888); 
-		canvas = new Canvas(canvasbitmap); 
+		super.onSizeChanged(w, h, oldw, oldh);
+		canvasbitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+		new Canvas(canvasbitmap);
 		height = h;
 		width = w;
-		
-		rocket = new Rocket();
+
 
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);		
-		canvas.drawColor(Color.BLUE);	
+		super.onDraw(canvas);
+		canvas.drawColor(Color.BLUE);
 
-		// haal images op van rocket, en update positie door accelerometervariables mee te geven
-		p=new Paint();
-        bmprocket =BitmapFactory.decodeResource(getResources(), R.drawable.rocket);
-        p.setColor(Color.RED);
+		// haal images op van rocket, en update positie door
+		// accelerometervariables mee te geven
 
-		//eerste run
-		if(rocket.getY() == 0){
-	        Log.v("000",rocket.getX() + " " + rocket.getY());
-			rocket.setX((width/2) - bmprocket.getWidth()/2);
-			rocket.setY(height-bmprocket.getHeight());
+		p.setColor(Color.RED);
+
+		// eerste run
+		if (rocketgame.getRocket().getY() == 0) {
+			Log.v("000", rocketgame.getRocket().getX() + " "
+					+ rocketgame.getRocket().getY());
+			rocketgame.getRocket().setX((width / 2) - bmprocket.getWidth() / 2);
+			rocketgame.getRocket().setY(height - bmprocket.getHeight());
 		}
-        rocket.updatePosition(accelerometerX, accelerometerY, accelerometerZ, accelerometerEventTijd);
-        //angle racket juistzetten
-        Matrix rotator = new Matrix();
-        int x = rocket.getX();
-        int y = rocket.getY();
-        rotator.postRotate(rocket.getRotationspeed(), x, y);
-        rotator.setTranslate(x, y);
-        
-        canvas.drawBitmap(bmprocket, rotator, p);
-        //canvas.drawBitmap(bmprocket, rocket.getX(), rocket.getY(), p);
-//		Log.v("000",rocket.getRotation()+ " ");
-       
-        invalidate();
-	}	
 	
-
-	@Override
-	public void onAccuracyChanged(Sensor arg0, int arg1) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-
-		  if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-	        	switch (display.getRotation()) {
-	    		case Surface.ROTATION_0:
-	    			accelerometerX = event.values[0];
-	    			accelerometerY = event.values[1];
-	    			break;
-	    		case Surface.ROTATION_90:
-	    			accelerometerX = -event.values[1];
-	    			accelerometerY = event.values[0];
-	    			break;
-	    		case Surface.ROTATION_180:
-	    			accelerometerX = -event.values[0];
-	    			accelerometerY = -event.values[1];
-	    			break;
-	    		case Surface.ROTATION_270:
-	    			accelerometerX = event.values[1];
-	    			accelerometerY = -event.values[0];
-
-	    			break;
-	    		}
-	    		accelerometerZ = event.values[2];
-	    		accelerometerEventTijd = event.timestamp;
-	        } 	
 		
+		Bitmap rocket = generateRotatedRocket();
+		
+
+		canvas.drawBitmap(rocket, rocketgame.getRocket().getX(), rocketgame
+				.getRocket().getY(), p);
+		canvas.drawText(rocketgame.getRocket().getRotation() + "", width / 2,
+				height / 2, p);
+
+		invalidate();
+		rocket.recycle();
 	}
 	
-	public void startSpel() {
-		sm.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
-	}
+	private Bitmap generateRotatedRocket()
+	{
+		
+		double rotation = rocketgame.getRocket().getRotation() + rocketgame.getRocket().getRotationspeed();
+		
+		if(rotation < 60 && rotation > -60){
+			rocketgame.getRocket().setRotation(rotation);
+		}
+		
+		rotator.postRotate((float) rocketgame.getRocket().getRotation());
 
-	public void stopSpel() {
-		sm.unregisterListener(this);
+		return Bitmap.createBitmap(bmprocket, 0, 0, bmprocket.getWidth(), bmprocket.getHeight(), rotator, true);
 	}
 }

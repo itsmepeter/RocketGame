@@ -7,7 +7,7 @@ public class Rocket {
 	private int y;
 	private int speed;
 	private float speedx;
-	private int rotation;
+	private double rotation;
 	private float rotationspeed;
 	private int health;
 	private ArrayList<Upgrade> upgrades;
@@ -46,13 +46,12 @@ public class Rocket {
 		upgrades.add(upgrade);
 	}
 
-	public int getRotation() {
+	public double getRotation() {
 		return rotation;
 	}
 
-	public void setRotation(int rotation) throws Exception {
+	public void setRotation(double rotation){
 		if(rotation > 60 || rotation < -60){
-			throw new Exception("Rocket needs a rotation beween -60 and 60 degrees");
 		}else{
 			this.rotation = rotation;
 		}
