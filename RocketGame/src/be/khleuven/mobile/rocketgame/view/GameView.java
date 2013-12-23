@@ -64,8 +64,6 @@ public class GameView extends View {
 
 		// eerste run
 		if (rocketgame.getRocket().getY() == 0) {
-			Log.v("000", rocketgame.getRocket().getX() + " "
-					+ rocketgame.getRocket().getY());
 			rocketgame.getRocket().setX((width / 2) - bmprocket.getWidth() / 2);
 			rocketgame.getRocket().setY(height - bmprocket.getHeight());
 		}
@@ -74,9 +72,8 @@ public class GameView extends View {
 		Bitmap rocket = generateRotatedRocket();
 		
 
-		canvas.drawBitmap(rocket, rocketgame.getRocket().getX(), rocketgame
-				.getRocket().getY(), p);
-		canvas.drawText(-rocketgame.getRocket().getRotationspeed() * 10 + "", width / 2,
+		canvas.drawBitmap(rocket, rocketgame.getRocket().getRotator(), p);
+		canvas.drawText(rocketgame.getRocket().getRotation() + "", width / 2,
 				height / 2, p);
 
 		invalidate();
@@ -85,8 +82,8 @@ public class GameView extends View {
 	
 	private Bitmap generateRotatedRocket()
 	{		
-		Log.v("002", rocketgame.getRocket().getRotationspeed() + " ");
 		rocketgame.getRocket().setRotation(bmprocket.getWidth(), bmprocket.getHeight());
-		return Bitmap.createBitmap(bmprocket, 0, 0, bmprocket.getWidth(), bmprocket.getHeight(), rocketgame.getRocket().getRotator(), false);
+		//rocketgame.getRocket().getRotator().setTranslate((width / 2) - bmprocket.getWidth() / 2, height - bmprocket.getHeight());
+		return Bitmap.createBitmap(bmprocket, 0, 0, bmprocket.getWidth(), bmprocket.getHeight(), rocketgame.getRocket().getRotator(), true);
 	}
 }

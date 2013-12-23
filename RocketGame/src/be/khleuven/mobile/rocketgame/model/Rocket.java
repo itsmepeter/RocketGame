@@ -62,7 +62,6 @@ public class Rocket {
 	public void setRotation(int rocketwidth, int rocketheight){
 		double r =  -getRotationspeed();
 		rotator.postRotate(0);
-		Log.v("003", r + " ");
 		/*if(r > 0 && r < 0.5){
 			if(rotation + 0.5 <= 45 && rotation + 0.5 >= -45){
 				rotator.postRotate((float) 0.5);
@@ -87,13 +86,15 @@ public class Rocket {
 
 		if(r > 0 ){
 			if(rotation + r*10 <= 45 && rotation + r*10 >= -45){
-				rotator.postRotate((float) r*10);
+				rotator.setTranslate(x, y);
+				rotator.postRotate((float) r*10, getX() + rocketwidth/2 ,  getY() + rocketheight/2);
 				rotation += r*10;
 			}
 		} else if (r < 0 ) {
 			if(rotation + r*10 <= 45 && rotation +r*10 >= -45){
-				rotation += r*10;
-				rotator.postRotate((float) r*10 );
+				rotator.setTranslate(x, y);
+				rotation += r*10;			
+				rotator.postRotate((float) r*10 , getX() + rocketwidth/2 ,  getY() + rocketheight/2);
 			}
 		} 
 	}
