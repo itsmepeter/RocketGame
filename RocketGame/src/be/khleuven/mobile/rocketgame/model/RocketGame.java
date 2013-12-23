@@ -52,4 +52,5 @@ public class RocketGame {
 	public ArrayList<Powerup> getPowerups(){
 		return powerups;
 	}
+
 }

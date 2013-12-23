@@ -2,6 +2,9 @@ package be.khleuven.mobile.rocketgame.model;
 
 import java.util.ArrayList;
 
+import android.graphics.Matrix;
+import android.util.Log;
+
 public class Rocket {
 	private int x;
 	private int y;
@@ -11,9 +14,11 @@ public class Rocket {
 	private float rotationspeed;
 	private int health;
 	private ArrayList<Upgrade> upgrades;
+	public Matrix rotator;
 	
 	public Rocket(){
 		rotation = 0;
+		rotator = new Matrix();
 	}
 	
 	public int getX() {
@@ -49,12 +54,48 @@ public class Rocket {
 	public double getRotation() {
 		return rotation;
 	}
+	
+	public Matrix getRotator(){
+		return rotator;
+	}
 
-	public void setRotation(double rotation){
-		if(rotation > 60 || rotation < -60){
-		}else{
-			this.rotation = rotation;
-		}
+	public void setRotation(int rocketwidth, int rocketheight){
+		double r =  -getRotationspeed();
+		rotator.postRotate(0);
+		Log.v("003", r + " ");
+		/*if(r > 0 && r < 0.5){
+			if(rotation + 0.5 <= 45 && rotation + 0.5 >= -45){
+				rotator.postRotate((float) 0.5);
+				rotation += 0.5;
+			}
+		} else if (r < 0 && r > -0.5) {
+			if(rotation - 0.5 <= 45 && rotation -0.5 >= -45){
+				rotation -= 0.5;
+				rotator.postRotate((float) -0.5);
+			}
+		} else if (r < -0.5) {
+				if(rotation - 3 <= 45 && rotation -3 >= -45){
+					rotation -= 3;
+					rotator.postRotate((float) -3);
+				}
+		} else if (r > 0.5) {
+			if(rotation + 3 <= 45 && rotation  +3 >= -45){
+				rotation += 3;
+				rotator.postRotate((float) 3);
+			}
+		}*/
+
+		if(r > 0 ){
+			if(rotation + r*10 <= 45 && rotation + r*10 >= -45){
+				rotator.postRotate((float) r*10);
+				rotation += r*10;
+			}
+		} else if (r < 0 ) {
+			if(rotation + r*10 <= 45 && rotation +r*10 >= -45){
+				rotation += r*10;
+				rotator.postRotate((float) r*10 );
+			}
+		} 
 	}
 
 	public ArrayList<Upgrade> getUpgrades() {

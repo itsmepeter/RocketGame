@@ -24,7 +24,7 @@ public class GameView extends View {
 	private int width;
 	private int height;
 
-	public Matrix rotator;
+
 
 	// paints
 	private Paint p;
@@ -38,7 +38,6 @@ public class GameView extends View {
 		
 		bmprocket = BitmapFactory.decodeResource(getResources(),
 				R.drawable.fullrocket);
-		rotator = new Matrix();
 
 	}
 
@@ -77,24 +76,17 @@ public class GameView extends View {
 
 		canvas.drawBitmap(rocket, rocketgame.getRocket().getX(), rocketgame
 				.getRocket().getY(), p);
-		canvas.drawText(rocketgame.getRocket().getRotation() + "", width / 2,
+		canvas.drawText(-rocketgame.getRocket().getRotationspeed() * 10 + "", width / 2,
 				height / 2, p);
 
 		invalidate();
-		rocket.recycle();
+		//rocket.recycle();
 	}
 	
 	private Bitmap generateRotatedRocket()
-	{
-		
-		double rotation = rocketgame.getRocket().getRotation() + rocketgame.getRocket().getRotationspeed();
-		
-		if(rotation < 60 && rotation > -60){
-			rocketgame.getRocket().setRotation(rotation);
-		}
-		
-		rotator.postRotate((float) rocketgame.getRocket().getRotation());
-
-		return Bitmap.createBitmap(bmprocket, 0, 0, bmprocket.getWidth(), bmprocket.getHeight(), rotator, true);
+	{		
+		Log.v("002", rocketgame.getRocket().getRotationspeed() + " ");
+		rocketgame.getRocket().setRotation(bmprocket.getWidth(), bmprocket.getHeight());
+		return Bitmap.createBitmap(bmprocket, 0, 0, bmprocket.getWidth(), bmprocket.getHeight(), rocketgame.getRocket().getRotator(), false);
 	}
 }
