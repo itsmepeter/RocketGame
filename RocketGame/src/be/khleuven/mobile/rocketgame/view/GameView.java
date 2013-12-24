@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class GameView extends View {
@@ -68,11 +67,8 @@ public class GameView extends View {
 			rocketgame.getRocket().setY(height - bmprocket.getHeight());
 		}
 	
-		
-		Bitmap rocket = generateRotatedRocket();
-		
 
-		canvas.drawBitmap(rocket, rocketgame.getRocket().getRotator(), p);
+		canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
 		canvas.drawText(rocketgame.getRocket().getRotation() + "", width / 2,
 				height / 2, p);
 
@@ -80,10 +76,12 @@ public class GameView extends View {
 		//rocket.recycle();
 	}
 	
-	private Bitmap generateRotatedRocket()
+	private Matrix generateRotationMatrix()
 	{		
-		rocketgame.getRocket().setRotation(bmprocket.getWidth(), bmprocket.getHeight());
-		//rocketgame.getRocket().getRotator().setTranslate((width / 2) - bmprocket.getWidth() / 2, height - bmprocket.getHeight());
-		return Bitmap.createBitmap(bmprocket, 0, 0, bmprocket.getWidth(), bmprocket.getHeight(), rocketgame.getRocket().getRotator(), true);
+		Matrix matrix = new Matrix();
+		matrix.reset();
+		matrix.setTranslate((width / 2) - bmprocket.getWidth() / 2 , height - bmprocket.getHeight());
+		matrix.preRotate((float) rocketgame.getRocket().getRotation(),bmprocket.getWidth()/2,bmprocket.getHeight()/2);
+		return matrix;
 	}
 }

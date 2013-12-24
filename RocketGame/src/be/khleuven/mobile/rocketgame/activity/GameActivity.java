@@ -19,7 +19,11 @@ public class GameActivity extends Activity {
 
 		public void onSensorChanged(SensorEvent se) {
 			x = se.values[0];
-			gameview.rocketgame.getRocket().setRotationspeed((float) (x*0.1));
+			float rotationmodifier = x/5;
+			float newrotation = (float) (gameview.rocketgame.getRocket().getRotation() + rotationmodifier);
+			if(newrotation < 45 && newrotation > -45){
+				gameview.rocketgame.getRocket().setRotation(gameview.rocketgame.getRocket().getRotation() + rotationmodifier);
+			}
 		}
 
 		@Override

@@ -2,9 +2,6 @@ package be.khleuven.mobile.rocketgame.model;
 
 import java.util.ArrayList;
 
-import android.graphics.Matrix;
-import android.util.Log;
-
 public class Rocket {
 	private int x;
 	private int y;
@@ -14,11 +11,11 @@ public class Rocket {
 	private float rotationspeed;
 	private int health;
 	private ArrayList<Upgrade> upgrades;
-	public Matrix rotator;
+	//public Matrix rotator;
 	
 	public Rocket(){
 		rotation = 0;
-		rotator = new Matrix();
+		//rotator = new Matrix();
 	}
 	
 	public int getX() {
@@ -55,10 +52,16 @@ public class Rocket {
 		return rotation;
 	}
 	
+	/*
 	public Matrix getRotator(){
 		return rotator;
+	}*/
+	
+	public void setRotation(double rotation){
+		this.rotation = rotation;
 	}
-
+	
+	/*
 	public void setRotation(int rocketwidth, int rocketheight){
 		double r =  -getRotationspeed();
 		rotator.postRotate(0);
@@ -82,7 +85,7 @@ public class Rocket {
 				rotation += 3;
 				rotator.postRotate((float) 3);
 			}
-		}*/
+		}
 
 		if(r > 0 ){
 			if(rotation + r*10 <= 45 && rotation + r*10 >= -45){
@@ -97,8 +100,9 @@ public class Rocket {
 				rotator.postRotate((float) r*10 , getX() + rocketwidth/2 ,  getY() + rocketheight/2);
 			}
 		} 
-	}
-
+	}	
+	*/
+	
 	public ArrayList<Upgrade> getUpgrades() {
 		return upgrades;
 	}
