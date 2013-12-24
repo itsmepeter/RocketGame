@@ -20,8 +20,8 @@ public class GameView extends View {
 	// Rocket
 	public RocketGame rocketgame;
 
-	private int width;
-	private int height;
+	public int width;
+	public int height;
 
 
 
@@ -80,8 +80,8 @@ public class GameView extends View {
 	{		
 		Matrix matrix = new Matrix();
 		matrix.reset();
-		matrix.setTranslate((width / 2) - bmprocket.getWidth() / 2 , height - bmprocket.getHeight());
-		matrix.preRotate((float) rocketgame.getRocket().getRotation(),bmprocket.getWidth()/2,bmprocket.getHeight()/2);
+		matrix.setTranslate(rocketgame.getRocket().getX() , height - bmprocket.getHeight());
+		matrix.preRotate((float) - rocketgame.getRocket().getRotation(),bmprocket.getWidth()/2,bmprocket.getHeight()/2);
 		return matrix;
 	}
 }
