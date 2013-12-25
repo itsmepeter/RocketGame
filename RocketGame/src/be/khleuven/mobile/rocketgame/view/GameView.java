@@ -82,10 +82,10 @@ public class GameView extends View {
 		//HIER ZOU EIGENLIJK ALLES GESCALED MOETEN WORDEN MAAR IK BEN EEN NOOB IN WISKUNDE
 		
 		bmprocket = Bitmap.createScaledBitmap(oldrocket, (int) 85, (int) 150,true);
-		oldcloud1 = Bitmap.createScaledBitmap(oldcloud1, (int) 30, (int) 30,true);;
-		oldcloud2 = Bitmap.createScaledBitmap(oldcloud2, (int) 30, (int) 30,true);;
-		oldcloud3 = Bitmap.createScaledBitmap(oldcloud3, (int) 30, (int) 30,true);;
-		oldcloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 30, (int) 30,true);;
+		cloud1 = Bitmap.createScaledBitmap(oldcloud1, (int) 200, (int) 200,true);;
+		cloud2 = Bitmap.createScaledBitmap(oldcloud2, (int) 200, (int) 200,true);;
+		cloud3 = Bitmap.createScaledBitmap(oldcloud3, (int) 200, (int) 200,true);;
+		cloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 200, (int) 200,true);;
 
 	}
 
@@ -105,9 +105,14 @@ public class GameView extends View {
 		// eerste run
 		if (rocketgame.getRocket().getY() == 0) {
 			rocketgame.getRocket().setX((width / 2) - bmprocket.getWidth() / 2);
-			rocketgame.getRocket().setY(height - bmprocket.getHeight());
+			rocketgame.getRocket().setY(height + bmprocket.getHeight()/2);
 			
 		}
+		
+		//startanimatie
+		if(rocketgame.getRocket().getY() > (0.70 * height)){
+			rocketgame.getRocket().setY(rocketgame.getRocket().getY()-1);
+        }
 	
 
 		canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
@@ -138,7 +143,7 @@ public class GameView extends View {
 	{		
 		Matrix matrix = new Matrix();
 		matrix.reset();
-		matrix.setTranslate(rocketgame.getRocket().getX() , height - bmprocket.getHeight());
+		matrix.setTranslate(rocketgame.getRocket().getX() , rocketgame.getRocket().getY());
 		matrix.preRotate((float) - rocketgame.getRocket().getRotation(),bmprocket.getWidth()/2,bmprocket.getHeight()/2);
 		return matrix;
 	}

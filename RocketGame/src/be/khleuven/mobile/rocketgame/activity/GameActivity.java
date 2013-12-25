@@ -75,7 +75,7 @@ public class GameActivity extends Activity {
 		    };
 		};
 		// first event immediately,  following after 1 seconds each
-		cloudtimer.scheduleAtFixedRate(refresher, 0, 500);
+		cloudtimer.scheduleAtFixedRate(refresher, 0, 100);
 	}
 	
 	@Override
