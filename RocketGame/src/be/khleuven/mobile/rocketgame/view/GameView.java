@@ -117,23 +117,20 @@ public class GameView extends View {
 
 		canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
 		canvas.drawText("HEIGHT: " + (int)rocketgame.getHeight(), 10, 20, p);
-		canvas.drawText("HEALTH: " + (int)rocketgame.getRocket().getHealth(), 10, 40, p);
+		canvas.drawText("HEALTH: " + (int)clouds.size(), 10, 40, p);
 		
 		
-		for(Cloud cloud : clouds){
-			if(cloud.getY() > height){
-				toberemoved.add(cloud);
+		for(int i = 0; i<clouds.size();i++){
+			if(clouds.get(i).getY() < height){
+				clouds.get(i).setY(clouds.get(i).getY() + 7);
+				clouds.get(i).setX((int) (clouds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 1));
+                canvas.drawBitmap(clouds.get(i).getImage(), clouds.get(i).getX(), clouds.get(i).getY(), p);
             }else{
-                cloud.setY(cloud.getY() + 7);
-                cloud.setX((int) (cloud.getX() + rocketgame.getRocket().getRotation()/10 + 1));
-                canvas.drawBitmap(cloud.getImage(), cloud.getX(), cloud.getY(), p);
+            	clouds.remove(i);
+            	i--;
             }
 		}
 		
-		for(Cloud cloud:toberemoved){
-            clouds.remove(cloud);
-		}
-		toberemoved.clear();
 
 		invalidate();
 		//rocket.recycle();

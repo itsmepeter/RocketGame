@@ -10,6 +10,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.WindowManager;
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.view.GameView;
@@ -47,6 +48,7 @@ public class GameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		gameview = (GameView) findViewById(R.id.gameActivity1);
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mSensorManager.registerListener(mSensorListener,
@@ -56,7 +58,7 @@ public class GameActivity extends Activity {
 		refresher = new TimerTask() {
 		    public void run() {
 		       double cloudrandom = Math.random();
-		       if(cloudrandom < 0.2 && gameview.getHeight() < 17000){
+		       if(cloudrandom < 0.2 && gameview.getHeight() < 17000 && gameview.clouds.size()<=5){
 		    	   double cloudrandom2 = Math.random();
 		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
 		           int y = -250;
