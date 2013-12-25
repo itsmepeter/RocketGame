@@ -6,6 +6,9 @@
     <string name="hello_world">Hello world!</string>
     <color name="MenuBackgroundColor">#0099FF</color>
     <string name="GameName">SUPER ROCKET RAMPAGE</string>
+    <string name="GameName1">SUPER</string>
+    <string name="GameName2">ROCKET</string>
+    <string name="GameName3">RAMPAGE</string>
     <string name="start">Start</string>
     <string name="options">Options</string>
     <string name="achievements">Achievements</string>

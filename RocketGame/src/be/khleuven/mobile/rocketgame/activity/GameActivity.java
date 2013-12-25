@@ -47,6 +47,12 @@ public class GameActivity extends Activity {
 				mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
 	}
+	
+	@Override
+    public void onBackPressed() {
+        super.onBackPressed();   
+        overridePendingTransition(R.anim.animation_enter2, R.anim.animation_leave2);
+    }
 
 	public void initialiseerImages() {
 
