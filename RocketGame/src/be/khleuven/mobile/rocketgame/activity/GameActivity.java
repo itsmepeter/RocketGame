@@ -1,5 +1,8 @@
 package be.khleuven.mobile.rocketgame.activity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -8,10 +11,13 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import be.khleuven.mobile.rocketgame.R;
+import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.view.GameView;
 
 public class GameActivity extends Activity {
 	GameView gameview;
+	private Timer cloudtimer;
+	private TimerTask refresher;
 
 	private SensorManager mSensorManager;
 	private float x; // acceleration apart from gravity
@@ -46,6 +52,30 @@ public class GameActivity extends Activity {
 		mSensorManager.registerListener(mSensorListener,
 				mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
 				SensorManager.SENSOR_DELAY_GAME);
+		cloudtimer = new Timer();    
+		refresher = new TimerTask() {
+		    public void run() {
+		       double cloudrandom = Math.random();
+		       if(cloudrandom < 0.2 && gameview.getHeight() < 17000){
+		    	   double cloudrandom2 = Math.random();
+		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
+		           int y = -250;
+		           Cloud cloud;
+		           if(cloudrandom2 < 0.25){
+		        	   cloud = new Cloud(randomx, y, gameview.cloud1, 0);
+		           }else if (cloudrandom2 < 0.50){
+		        	   cloud = new Cloud(randomx, y, gameview.cloud2, 0);
+		           }else if (cloudrandom2 < 0.75){
+		        	   cloud = new Cloud(randomx, y, gameview.cloud3, 0); 
+		           }else{
+		        	   cloud = new Cloud(randomx, y, gameview.cloud4, 0);
+		           }
+		           gameview.clouds.add(cloud);
+		       }
+		    };
+		};
+		// first event immediately,  following after 1 seconds each
+		cloudtimer.scheduleAtFixedRate(refresher, 0, 500);
 	}
 	
 	@Override
