@@ -7,6 +7,7 @@ public class RocketGame {
 	private int money;
 	private String username;
 	private ArrayList<Powerup> powerups;
+	private int height;
 	
 
 	public RocketGame(){
@@ -51,6 +52,14 @@ public class RocketGame {
 	
 	public ArrayList<Powerup> getPowerups(){
 		return powerups;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 }

@@ -37,6 +37,8 @@ public class GameView extends View {
 		
 		bmprocket = BitmapFactory.decodeResource(getResources(),
 				R.drawable.fullrocket);
+		
+
 
 	}
 
@@ -47,30 +49,41 @@ public class GameView extends View {
 		new Canvas(canvasbitmap);
 		height = h;
 		width = w;
+		
 
+		
+		Bitmap oldrocket = bmprocket;
+		
+		
+		bmprocket = Bitmap.createScaledBitmap(oldrocket, (int) 85, (int) 150,true);
 
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		
+		rocketgame.setHeight(rocketgame.getHeight()+1);
+		
 		canvas.drawColor(Color.BLUE);
 
 		// haal images op van rocket, en update positie door
 		// accelerometervariables mee te geven
 
-		p.setColor(Color.RED);
+		p.setColor(Color.WHITE);
 
 		// eerste run
 		if (rocketgame.getRocket().getY() == 0) {
 			rocketgame.getRocket().setX((width / 2) - bmprocket.getWidth() / 2);
 			rocketgame.getRocket().setY(height - bmprocket.getHeight());
+			
 		}
 	
 
 		canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
-		canvas.drawText(rocketgame.getRocket().getRotation() + "", width / 2,
-				height / 2, p);
+		canvas.drawText("HEIGHT: " + (int)rocketgame.getHeight(), 10, 20, p);
+		canvas.drawText("HEALTH: " + (int)rocketgame.getRocket().getHealth(), 10, 40, p);
+
 
 		invalidate();
 		//rocket.recycle();

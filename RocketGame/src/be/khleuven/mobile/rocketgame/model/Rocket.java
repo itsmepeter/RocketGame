@@ -14,6 +14,7 @@ public class Rocket {
 	//public Matrix rotator;
 	
 	public Rocket(){
+		setHealth(100);
 		rotation = 0;
 		//rotator = new Matrix();
 	}
