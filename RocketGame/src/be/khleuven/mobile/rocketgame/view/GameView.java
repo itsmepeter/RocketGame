@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.activity.GameActivity;
+import be.khleuven.mobile.rocketgame.activity.GameOverActivity;
+import be.khleuven.mobile.rocketgame.activity.ShopActivity;
 import be.khleuven.mobile.rocketgame.model.Bird;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.RocketGame;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -174,7 +177,7 @@ public class GameView extends View {
 			
 			//birds
 					for(int i = 0; i< birds.size();i++){
-					   if(birds.get(i).getX() < rocketgame.getRocket().getX() && birds.get(i).getX() + 100 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+60){
+					   if(birds.get(i).getX() + 20 < rocketgame.getRocket().getX() && birds.get(i).getX() + 100 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+60){
 			               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
 			               birds.get(i).setDmg(0);
 			               if(context instanceof GameActivity)
@@ -195,8 +198,12 @@ public class GameView extends View {
 			            }
 					}
 		} else {
-				canvas.drawColor(Color.BLUE);
-			    canvas.drawText("GAME OVER", width/2, height/2, p);
+			   if(context instanceof GameActivity)
+               {
+            	   GameActivity activity = (GameActivity)context;
+            	   activity.gameOver(this);
+               }
+
 		}
 
 		invalidate();

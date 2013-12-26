@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,6 +15,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.model.Bird;
@@ -141,6 +143,12 @@ public class GameActivity extends Activity {
 			} 
 
 		}
+	}
+	
+	public void gameOver(View view){
+		Intent myIntent = new Intent(view.getContext(), GameOverActivity.class);
+		startActivityForResult(myIntent, 0);
+		overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
 	}
 
 }
