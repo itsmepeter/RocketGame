@@ -1,13 +1,11 @@
 package be.khleuven.mobile.rocketgame.activity;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -159,7 +157,6 @@ public class GameActivity extends Activity {
 	public void gameOver(View view){
 		Intent myIntent = new Intent(view.getContext(), GameOverActivity.class);
 		startActivityForResult(myIntent, 0);
-		overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
 	}
 
 	public void hitStarSound(int i) {

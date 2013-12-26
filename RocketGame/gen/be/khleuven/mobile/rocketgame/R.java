@@ -46,26 +46,29 @@ public final class R {
         public static final int plane=0x7f02000b;
         public static final int right_wing=0x7f02000c;
         public static final int rocket=0x7f02000d;
-        public static final int window=0x7f02000e;
+        public static final int star=0x7f02000e;
+        public static final int window=0x7f02000f;
     }
     public static final class id {
-        public static final int TextView2=0x7f0b0008;
-        public static final int action_settings=0x7f0b000b;
-        public static final int btnAchievements=0x7f0b0006;
-        public static final int btnHighScores=0x7f0b0007;
-        public static final int btnMenuStart=0x7f0b0004;
-        public static final int btnOptions=0x7f0b0005;
-        public static final int btnShopBack=0x7f0b0009;
-        public static final int btnShopStart=0x7f0b000a;
+        public static final int TextView2=0x7f0b0009;
+        public static final int action_settings=0x7f0b000c;
+        public static final int btnAchievements=0x7f0b0007;
+        public static final int btnHighScores=0x7f0b0008;
+        public static final int btnMenuStart=0x7f0b0005;
+        public static final int btnOptions=0x7f0b0006;
+        public static final int btnShopBack=0x7f0b000a;
+        public static final int btnShopStart=0x7f0b000b;
+        public static final int button1=0x7f0b0002;
         public static final int gameActivity1=0x7f0b0000;
         public static final int textView1=0x7f0b0001;
-        public static final int textView2=0x7f0b0002;
-        public static final int textView3=0x7f0b0003;
+        public static final int textView2=0x7f0b0003;
+        public static final int textView3=0x7f0b0004;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;
-        public static final int activity_menu=0x7f030001;
-        public static final int activity_shop=0x7f030002;
+        public static final int activity_gameover=0x7f030001;
+        public static final int activity_menu=0x7f030002;
+        public static final int activity_shop=0x7f030003;
     }
     public static final class menu {
         public static final int menu=0x7f0a0000;
@@ -74,10 +77,12 @@ public final class R {
         public static final int hit1=0x7f050000;
     }
     public static final class string {
+        public static final int ButtonGameOver=0x7f07000e;
         public static final int GameName=0x7f070003;
         public static final int GameName1=0x7f070004;
         public static final int GameName2=0x7f070005;
         public static final int GameName3=0x7f070006;
+        public static final int GameOver=0x7f07000f;
         public static final int achievements=0x7f070009;
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;

@@ -1,7 +1,6 @@
 package be.khleuven.mobile.rocketgame.model;
 
 import android.graphics.Bitmap;
-import android.media.MediaPlayer;
 
 public class Jet extends SpaceObject {
 	private int dmg;
