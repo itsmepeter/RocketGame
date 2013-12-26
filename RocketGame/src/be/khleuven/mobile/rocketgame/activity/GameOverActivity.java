@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class GameOverActivity extends Activity{
 
@@ -17,7 +18,17 @@ public class GameOverActivity extends Activity{
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			
+		
 		setContentView(R.layout.activity_gameover);
+		
+		Intent intent = getIntent();
+		int height = intent.getIntExtra("height", 0);
+		int money = intent.getIntExtra("money", 0);
+		
+		String text = "Height: " + height + "\n" + "Money: " + money;
+			
+		final TextView textViewToChange = (TextView) findViewById(R.id.textView2);
+		textViewToChange.setText(text);
 	}
 	
 	public void onClickShop(View view) {

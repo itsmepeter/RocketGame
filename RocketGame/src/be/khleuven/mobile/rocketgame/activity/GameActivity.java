@@ -156,6 +156,8 @@ public class GameActivity extends Activity {
 	
 	public void gameOver(View view){
 		Intent myIntent = new Intent(view.getContext(), GameOverActivity.class);
+		myIntent.putExtra("height", gameview.rocketgame.getHeight());
+		myIntent.putExtra("money", gameview.rocketgame.getMoney());
 		startActivityForResult(myIntent, 0);
 	}
 

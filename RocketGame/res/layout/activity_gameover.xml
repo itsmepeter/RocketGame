@@ -20,13 +20,22 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF" />
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView1"
+        android:gravity="center_horizontal"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/textView2"
         android:layout_marginTop="40dp"
         android:background="#CCCCCC"
         android:onClick="onClickShop"
