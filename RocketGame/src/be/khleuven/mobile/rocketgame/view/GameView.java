@@ -141,8 +141,10 @@ public class GameView extends View {
 			}
 
 			canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
-			canvas.drawText("HEIGHT: " + (int) rocketgame.getHeight(), 10, 20,p);
-			canvas.drawText("HEALTH: " + (int) rocketgame.getRocket().getHealth(), 10, 40, p);
+			canvas.drawText("HEIGHT: " + (int) rocketgame.getHeight(), 10, 20,
+					p);
+			canvas.drawText("HEALTH: "
+					+ (int) rocketgame.getRocket().getHealth(), 10, 40, p);
 			canvas.drawText("MONEY: " + (int) rocketgame.getMoney(), 10, 60, p);
 
 			// clouds
@@ -162,13 +164,14 @@ public class GameView extends View {
 
 			// jets
 			for (int i = 0; i < jets.size(); i++) {
-				if (jets.get(i).getX() + jet.getWidth()/2 < rocketgame.getRocket().getX()+ bmprocket.getWidth()
-						&& jets.get(i).getX() +  jet.getWidth()/2 > rocketgame.getRocket()
-						.getX()
-				&& jets.get(i).getY() + jet.getHeight()/2 > rocketgame.getRocket()
-						.getY()
-				&& jets.get(i).getY() + jet.getHeight()/2 < rocketgame.getRocket()
-						.getY() + bmprocket.getHeight()) {
+				if (jets.get(i).getX() + jet.getWidth() / 2 < rocketgame
+						.getRocket().getX() + bmprocket.getWidth()
+						&& jets.get(i).getX() + jet.getWidth() / 2 > rocketgame
+								.getRocket().getX()
+						&& jets.get(i).getY() + jet.getHeight() / 2 > rocketgame
+								.getRocket().getY()
+						&& jets.get(i).getY() + jet.getHeight() / 2 < rocketgame
+								.getRocket().getY() + bmprocket.getHeight()) {
 					rocketgame.getRocket().setHealth(
 							rocketgame.getRocket().getHealth()
 									- jets.get(i).getDmg());
@@ -194,23 +197,23 @@ public class GameView extends View {
 
 			// birds
 			for (int i = 0; i < birds.size(); i++) {
-				if (birds.get(i).getX() + bird.getWidth()/2 < rocketgame.getRocket().getX()+ bmprocket.getWidth()
-						&& birds.get(i).getX() +  bird.getWidth()/2 > rocketgame.getRocket()
-						.getX()
-				&& birds.get(i).getY() + bird.getHeight()/2 > rocketgame.getRocket()
-						.getY()
-				&& birds.get(i).getY() + bird.getHeight()/2 < rocketgame.getRocket()
-						.getY() + bmprocket.getHeight()) {
+				if (birds.get(i).getX() + bird.getWidth() / 2 < rocketgame
+						.getRocket().getX() + bmprocket.getWidth()
+						&& birds.get(i).getX() + bird.getWidth() / 2 > rocketgame
+								.getRocket().getX()
+						&& birds.get(i).getY() + bird.getHeight() / 2 > rocketgame
+								.getRocket().getY()
+						&& birds.get(i).getY() + bird.getHeight() / 2 < rocketgame
+								.getRocket().getY() + bmprocket.getHeight()) {
 					rocketgame.getRocket().setHealth(
 							rocketgame.getRocket().getHealth()
 									- birds.get(i).getDmg());
-					birds.get(i).setDmg(0);
 					if (context instanceof GameActivity) {
 						GameActivity activity = (GameActivity) context;
 
 						activity.hitBirdSound(i);
 					}
-
+					birds.get(i).setDmg(0);
 				}
 				if (birds.get(i).getY() < height) {
 					birds.get(i).setY(birds.get(i).getY() + 7);
@@ -226,13 +229,14 @@ public class GameView extends View {
 			}
 
 			for (int i = 0; i < stars.size(); i++) {
-				if (stars.get(i).getX() + star.getWidth()/2 < rocketgame.getRocket().getX()+ bmprocket.getWidth()
-						&& stars.get(i).getX() +  star.getWidth()/2 > rocketgame.getRocket()
-								.getX()
-						&& stars.get(i).getY() + star.getHeight()/2 > rocketgame.getRocket()
-								.getY()
-						&& stars.get(i).getY() + star.getHeight()/2 < rocketgame.getRocket()
-								.getY() + bmprocket.getHeight()) {
+				if (stars.get(i).getX() + star.getWidth() / 2 < rocketgame
+						.getRocket().getX() + bmprocket.getWidth()
+						&& stars.get(i).getX() + star.getWidth() / 2 > rocketgame
+								.getRocket().getX()
+						&& stars.get(i).getY() + star.getHeight() / 2 > rocketgame
+								.getRocket().getY()
+						&& stars.get(i).getY() + star.getHeight() / 2 < rocketgame
+								.getRocket().getY() + bmprocket.getHeight()) {
 					rocketgame.setMoney(rocketgame.getMoney() + 20);
 					stars.get(i).setDmg(0);
 					if (context instanceof GameActivity) {

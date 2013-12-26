@@ -74,7 +74,11 @@ public final class R {
         public static final int menu=0x7f0a0000;
     }
     public static final class raw {
-        public static final int hit1=0x7f050000;
+        public static final int coin=0x7f050000;
+        public static final int hit1=0x7f050001;
+        public static final int hit2=0x7f050002;
+        public static final int hit3=0x7f050003;
+        public static final int music=0x7f050004;
     }
     public static final class string {
         public static final int ButtonGameOver=0x7f07000e;
