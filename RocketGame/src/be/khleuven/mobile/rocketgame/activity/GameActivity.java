@@ -87,7 +87,7 @@ public class GameActivity extends Activity {
 		       
 		       //planes
 		       double obstaclerandom = Math.random();
-		       if(obstaclerandom < 0.01 && gameview.jets.size() < 1 && gameview.rocketgame.getHeight() > 750 && gameview.rocketgame.getHeight() < 12000){
+		       if(obstaclerandom < 0.01 && gameview.jets.size() < 1 && gameview.rocketgame.getHeight() > 7500 && gameview.rocketgame.getHeight() < 12000){
 		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
 		    	   int y = -250;
 		    	   Jet jet = new Jet(randomx, y, gameview.jet, 0);
