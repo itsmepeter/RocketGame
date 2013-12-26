@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.model.Cloud;
+import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.RocketGame;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ public class GameView extends View {
 	public Bitmap cloud2;
 	public Bitmap cloud3;
 	public Bitmap cloud4;
+	public Bitmap jet;
 	
 
 	// Rocket
@@ -34,6 +36,7 @@ public class GameView extends View {
 	public ArrayList<Cloud> clouds = new ArrayList<Cloud>();
 	public ArrayList<Cloud>toberemoved = new ArrayList<Cloud>();
 
+	public ArrayList<Jet> jets = new ArrayList<Jet>();
 
 
 	// paints
@@ -60,6 +63,8 @@ public class GameView extends View {
 		
 		cloud4 = BitmapFactory.decodeResource(getResources(),
 				R.drawable.cloud4);
+		
+		jet = BitmapFactory.decodeResource(getResources(), R.drawable.plane);
 
 	}
 
@@ -78,6 +83,7 @@ public class GameView extends View {
 		Bitmap oldcloud2 = cloud2;
 		Bitmap oldcloud3 = cloud3;
 		Bitmap oldcloud4 = cloud4;
+		Bitmap oldplane = jet;
 		
 		//HIER ZOU EIGENLIJK ALLES GESCALED MOETEN WORDEN MAAR IK BEN EEN NOOB IN WISKUNDE
 		
@@ -86,6 +92,7 @@ public class GameView extends View {
 		cloud2 = Bitmap.createScaledBitmap(oldcloud2, (int) 200, (int) 200,true);;
 		cloud3 = Bitmap.createScaledBitmap(oldcloud3, (int) 200, (int) 200,true);;
 		cloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 200, (int) 200,true);;
+		jet = Bitmap.createScaledBitmap(oldplane, (int) 200, (int) 200, true);;
 
 	}
 
@@ -119,7 +126,7 @@ public class GameView extends View {
 		canvas.drawText("HEIGHT: " + (int)rocketgame.getHeight(), 10, 20, p);
 		canvas.drawText("HEALTH: " + (int)clouds.size(), 10, 40, p);
 		
-		
+		//clouds
 		for(int i = 0; i<clouds.size();i++){
 			if(clouds.get(i).getY() < height){
 				clouds.get(i).setY(clouds.get(i).getY() + 7);
@@ -130,6 +137,22 @@ public class GameView extends View {
             	i--;
             }
 		}
+		
+		//jets
+		for(int i = 0; i< jets.size();i++){
+			if(jets.get(i).getY() < height){
+				jets.get(i).setY(jets.get(i).getY() + 7);
+				jets.get(i).setX((int) (jets.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 1));
+                canvas.drawBitmap(jets.get(i).getImage(), jets.get(i).getX(), jets.get(i).getY(), p);
+            }else{
+            	jets.remove(i);
+            	i--;
+            }
+		}
+		
+
+		
+		
 		
 
 		invalidate();

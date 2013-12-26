@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.model.Cloud;
+import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.view.GameView;
 
 public class GameActivity extends Activity {
@@ -57,6 +59,7 @@ public class GameActivity extends Activity {
 		cloudtimer = new Timer();    
 		refresher = new TimerTask() {
 		    public void run() {
+		    	//clouds
 		       double cloudrandom = Math.random();
 		       if(cloudrandom < 0.2 && gameview.getHeight() < 17000 && gameview.clouds.size()<=5){
 		    	   double cloudrandom2 = Math.random();
@@ -74,6 +77,16 @@ public class GameActivity extends Activity {
 		           }
 		           gameview.clouds.add(cloud);
 		       }
+		       
+		       
+		       //planes
+		       double obstaclerandom = Math.random();
+		       if(obstaclerandom < 0.01 && gameview.jets.size() < 1 && gameview.getHeight() > 750 && gameview.getHeight() < 12000){
+		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
+		    	   int y = -250;
+		    	   Jet jet = new Jet(randomx, y, gameview.jet, 0);
+			       gameview.jets.add(jet);
+			    }
 		    };
 		};
 		// first event immediately,  following after 1 seconds each
