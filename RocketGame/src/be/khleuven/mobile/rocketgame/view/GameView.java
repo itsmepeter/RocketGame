@@ -111,97 +111,93 @@ public class GameView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		
-		rocketgame.setHeight(rocketgame.getHeight()+1);
-		
-		canvas.drawColor(Color.BLUE);
-
-		// haal images op van rocket, en update positie door
-		// accelerometervariables mee te geven
-
-		p.setColor(Color.WHITE);
-
-		// eerste run
-		if (rocketgame.getRocket().getY() == 0) {
-			rocketgame.getRocket().setX((width / 2) - bmprocket.getWidth() / 2);
-			rocketgame.getRocket().setY(height + bmprocket.getHeight()/2);
+		if(rocketgame.getRocket().getHealth() > 0){
+			rocketgame.setHeight(rocketgame.getHeight()+1);
 			
-		}
-		
-		//startanimatie
-		if(rocketgame.getRocket().getY() > (0.70 * height)){
-			rocketgame.getRocket().setY(rocketgame.getRocket().getY()-1);
-        }
-	
+			canvas.drawColor(Color.BLUE);
 
-		canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
-		canvas.drawText("HEIGHT: " + (int)rocketgame.getHeight(), 10, 20, p);
-		canvas.drawText("HEALTH: " + (int)rocketgame.getRocket().getHealth(), 10, 40, p);
-		
-		//clouds
-		for(int i = 0; i<clouds.size();i++){
-			if(clouds.get(i).getY() < height){
-				clouds.get(i).setY(clouds.get(i).getY() + 7);
-				clouds.get(i).setX((int) (clouds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 1));
-                canvas.drawBitmap(clouds.get(i).getImage(), clouds.get(i).getX(), clouds.get(i).getY(), p);
-            }else{
-            	clouds.remove(i);
-            	i--;
-            }
-		}
-		
-		//jets
-		for(int i = 0; i< jets.size();i++){
-		   if(jets.get(i).getX() < rocketgame.getRocket().getX() && jets.get(i).getX() + 600 > rocketgame.getRocket().getX() && jets.get(i).getY() + 252 > rocketgame.getRocket().getY() && jets.get(i).getY()+252 < rocketgame.getRocket().getY()+10){
-               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - jets.get(i).getDmg());
-               jets.get(i).setDmg(0);
-               if(context instanceof GameActivity)
-               {
-            	   GameActivity activity = (GameActivity)context;
-            	   activity.hitJetSound(i);
-               }
-               
-           }  
-			if(jets.get(i).getY() < height){
-				jets.get(i).setY(jets.get(i).getY() + 7);
-				jets.get(i).setX((int) (jets.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
-                canvas.drawBitmap(jets.get(i).getImage(), jets.get(i).getX(), jets.get(i).getY(), p);
-            }else{
-            	jets.remove(i);
-            	i--;
-            }
-		}
-		
-		//birds
-				for(int i = 0; i< birds.size();i++){
-				   if(birds.get(i).getX() < rocketgame.getRocket().getX() && birds.get(i).getX() + 60 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+10){
-		               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
-		               birds.get(i).setDmg(0);
-		               if(context instanceof GameActivity)
-		               {
-		            	   GameActivity activity = (GameActivity)context;
-		                   
-		                   activity.hitBirdSound(i);
-		               }
-		               
-		           }  
-					if(birds.get(i).getY() < height){
-						birds.get(i).setY(birds.get(i).getY() + 7);
-						birds.get(i).setX((int) (birds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
-		                canvas.drawBitmap(birds.get(i).getImage(), birds.get(i).getX(), birds.get(i).getY(), p);
-		            }else{
-		            	birds.remove(i);
-		            	i--;
-		            }
-				}
+			// haal images op van rocket, en update positie door
+			// accelerometervariables mee te geven
+
+			p.setColor(Color.WHITE);
+
+			// eerste run
+			if (rocketgame.getRocket().getY() == 0) {
+				rocketgame.getRocket().setX((width / 2) - bmprocket.getWidth() / 2);
+				rocketgame.getRocket().setY(height + bmprocket.getHeight()/2);
 				
+			}
+			
+			//startanimatie
+			if(rocketgame.getRocket().getY() > (0.70 * height)){
+				rocketgame.getRocket().setY(rocketgame.getRocket().getY()-1);
+	        }
 		
 
-		
-
-		
-		
-		
+			canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
+			canvas.drawText("HEIGHT: " + (int)rocketgame.getHeight(), 10, 20, p);
+			canvas.drawText("HEALTH: " + (int)rocketgame.getRocket().getHealth(), 10, 40, p);
+			
+			//clouds
+			for(int i = 0; i<clouds.size();i++){
+				if(clouds.get(i).getY() < height){
+					clouds.get(i).setY(clouds.get(i).getY() + 7);
+					clouds.get(i).setX((int) (clouds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 1));
+	                canvas.drawBitmap(clouds.get(i).getImage(), clouds.get(i).getX(), clouds.get(i).getY(), p);
+	            }else{
+	            	clouds.remove(i);
+	            	i--;
+	            }
+			}
+			
+			//jets
+			for(int i = 0; i< jets.size();i++){
+			   if(jets.get(i).getX() < rocketgame.getRocket().getX() && jets.get(i).getX() + 600 > rocketgame.getRocket().getX() && jets.get(i).getY() + 252 > rocketgame.getRocket().getY() && jets.get(i).getY()+252 < rocketgame.getRocket().getY()+60){
+	               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - jets.get(i).getDmg());
+	               jets.get(i).setDmg(0);
+	               if(context instanceof GameActivity)
+	               {
+	            	   GameActivity activity = (GameActivity)context;
+	            	   activity.hitJetSound(i);
+	               }
+	               
+	           }  
+				if(jets.get(i).getY() < height){
+					jets.get(i).setY(jets.get(i).getY() + 7);
+					jets.get(i).setX((int) (jets.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
+	                canvas.drawBitmap(jets.get(i).getImage(), jets.get(i).getX(), jets.get(i).getY(), p);
+	            }else{
+	            	jets.remove(i);
+	            	i--;
+	            }
+			}
+			
+			//birds
+					for(int i = 0; i< birds.size();i++){
+					   if(birds.get(i).getX() < rocketgame.getRocket().getX() && birds.get(i).getX() + 100 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+60){
+			               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
+			               birds.get(i).setDmg(0);
+			               if(context instanceof GameActivity)
+			               {
+			            	   GameActivity activity = (GameActivity)context;
+			                   
+			                   activity.hitBirdSound(i);
+			               }
+			               
+			           }  
+						if(birds.get(i).getY() < height){
+							birds.get(i).setY(birds.get(i).getY() + 7);
+							birds.get(i).setX((int) (birds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
+			                canvas.drawBitmap(birds.get(i).getImage(), birds.get(i).getX(), birds.get(i).getY(), p);
+			            }else{
+			            	birds.remove(i);
+			            	i--;
+			            }
+					}
+		} else {
+				canvas.drawColor(Color.BLUE);
+			    canvas.drawText("GAME OVER", width/2, height/2, p);
+		}
 
 		invalidate();
 		//rocket.recycle();
