@@ -9,6 +9,7 @@ import be.khleuven.mobile.rocketgame.activity.ShopActivity;
 import be.khleuven.mobile.rocketgame.model.Bird;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
+import be.khleuven.mobile.rocketgame.model.Money;
 import be.khleuven.mobile.rocketgame.model.RocketGame;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class GameView extends View {
 	public Bitmap cloud4;
 	public Bitmap jet;
 	public Bitmap bird;
+	public Bitmap star;
 	
 
 	// Rocket
@@ -46,6 +48,7 @@ public class GameView extends View {
 	public ArrayList<Jet> jets = new ArrayList<Jet>();
 	public ArrayList<Bird> birds = new ArrayList<Bird>();
 
+	public ArrayList<Money> stars = new ArrayList<Money>();
 
 	// paints
 	private Paint p;
@@ -78,6 +81,8 @@ public class GameView extends View {
 		jet = BitmapFactory.decodeResource(getResources(), R.drawable.plane);
 		
 		bird = BitmapFactory.decodeResource(getResources(), R.drawable.bird);
+		
+		star = BitmapFactory.decodeResource(getResources(), R.drawable.star);
 
 	}
 
@@ -98,6 +103,7 @@ public class GameView extends View {
 		Bitmap oldcloud4 = cloud4;
 		Bitmap oldplane = jet;
 		Bitmap oldbird = bird;
+		Bitmap oldstar = star;
 		
 		//HIER ZOU EIGENLIJK ALLES GESCALED MOETEN WORDEN MAAR IK BEN EEN NOOB IN WISKUNDE
 		
@@ -108,6 +114,7 @@ public class GameView extends View {
 		cloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 200, (int) 200,true);
 		jet = Bitmap.createScaledBitmap(oldplane, (int) 200, (int) 200, true);
 		bird = Bitmap.createScaledBitmap(oldbird, (int) 60, (int) 60, true);
+		star = Bitmap.createScaledBitmap(oldstar, (int) 60, (int) 60, true);
 
 	}
 
@@ -176,27 +183,50 @@ public class GameView extends View {
 			}
 			
 			//birds
-					for(int i = 0; i< birds.size();i++){
-					   if(birds.get(i).getX() + 20 < rocketgame.getRocket().getX() && birds.get(i).getX() + 100 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+60){
-			               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
-			               birds.get(i).setDmg(0);
-			               if(context instanceof GameActivity)
-			               {
-			            	   GameActivity activity = (GameActivity)context;
-			                   
-			                   activity.hitBirdSound(i);
-			               }
-			               
-			           }  
-						if(birds.get(i).getY() < height){
-							birds.get(i).setY(birds.get(i).getY() + 7);
-							birds.get(i).setX((int) (birds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
-			                canvas.drawBitmap(birds.get(i).getImage(), birds.get(i).getX(), birds.get(i).getY(), p);
-			            }else{
-			            	birds.remove(i);
-			            	i--;
-			            }
-					}
+			for(int i = 0; i< birds.size();i++){
+			   if(birds.get(i).getX() + 20 < rocketgame.getRocket().getX() && birds.get(i).getX() + 100 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+60){
+	               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
+	               birds.get(i).setDmg(0);
+	               if(context instanceof GameActivity)
+	               {
+	            	   GameActivity activity = (GameActivity)context;
+	                   
+	                   activity.hitBirdSound(i);
+	               }
+	               
+	           }  
+				if(birds.get(i).getY() < height){
+					birds.get(i).setY(birds.get(i).getY() + 7);
+					birds.get(i).setX((int) (birds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
+		            canvas.drawBitmap(birds.get(i).getImage(), birds.get(i).getX(), birds.get(i).getY(), p);
+		        }else{
+		        	birds.remove(i);
+		        	i--;
+		        }
+			}
+			
+			for(int i = 0; i< stars.size();i++){
+				   if(stars.get(i).getX() + 20 < rocketgame.getRocket().getX() && stars.get(i).getX() + 100 > rocketgame.getRocket().getX() && stars.get(i).getY() + 60 > rocketgame.getRocket().getY() && stars.get(i).getY()+60 < rocketgame.getRocket().getY()+60){
+		               rocketgame.setMoney(rocketgame.getMoney() + 1);
+		               stars.get(i).setDmg(0);
+		               if(context instanceof GameActivity)
+		               {
+		            	   GameActivity activity = (GameActivity)context;
+		            	   activity.hitStarSound(i);
+		            	   stars.remove(i);
+		               }
+		               
+		           } else{ 
+					if(stars.get(i).getY() < height){
+						stars.get(i).setY(stars.get(i).getY() + 7);
+						stars.get(i).setX((int) (stars.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
+		                canvas.drawBitmap(stars.get(i).getImage(), stars.get(i).getX(), stars.get(i).getY(), p);
+		            }else{
+		            	stars.remove(i);
+		            	i--;
+		            }
+		           }
+			}
 		} else {
 			   if(context instanceof GameActivity)
                {

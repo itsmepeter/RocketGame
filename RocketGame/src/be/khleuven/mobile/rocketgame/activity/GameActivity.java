@@ -21,6 +21,7 @@ import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.model.Bird;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
+import be.khleuven.mobile.rocketgame.model.Money;
 import be.khleuven.mobile.rocketgame.view.GameView;
 
 public class GameActivity extends Activity {
@@ -101,6 +102,16 @@ public class GameActivity extends Activity {
 				       gameview.birds.add(bird);
 			    }
 		       
+		       
+		       //stars
+		       double starrandom = Math.random();
+		       if(starrandom > 0.80 && gameview.stars.size() < 10){
+		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
+		    	   int y = -250;
+		    	   Money money = new Money(randomx, y, gameview.star, 0);
+			       gameview.stars.add(money);
+			       
+			    } 
 		    };
 		};
 		// first event immediately,  following after 1 seconds each
@@ -149,6 +160,21 @@ public class GameActivity extends Activity {
 		Intent myIntent = new Intent(view.getContext(), GameOverActivity.class);
 		startActivityForResult(myIntent, 0);
 		overridePendingTransition(R.anim.animation_enter, R.anim.animation_leave);
+	}
+
+	public void hitStarSound(int i) {
+		mediaplayer = MediaPlayer.create(this, R.raw.hit1);
+		if(gameview.stars.get(i).getDmg() == 10){
+			try {
+				mediaplayer.prepare();
+				mediaplayer.start();
+				Log.v("004", "sound please");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+
+		}
+		
 	}
 
 }
