@@ -218,8 +218,8 @@ public class GameView extends View {
 		               
 		           } else{ 
 					if(stars.get(i).getY() < height){
-						stars.get(i).setY(stars.get(i).getY() + 7);
-						stars.get(i).setX((int) (stars.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
+						stars.get(i).setY(stars.get(i).getY() + 10);
+						stars.get(i).setX((int) (stars.get(i).getX() + rocketgame.getRocket().getRotation()/10 ));
 		                canvas.drawBitmap(stars.get(i).getImage(), stars.get(i).getX(), stars.get(i).getY(), p);
 		            }else{
 		            	stars.remove(i);
