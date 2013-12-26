@@ -124,7 +124,7 @@ public class GameView extends View {
 
 		canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
 		canvas.drawText("HEIGHT: " + (int)rocketgame.getHeight(), 10, 20, p);
-		canvas.drawText("HEALTH: " + (int)clouds.size(), 10, 40, p);
+		canvas.drawText("HEALTH: " + (int)rocketgame.getRocket().getHealth(), 10, 40, p);
 		
 		//clouds
 		for(int i = 0; i<clouds.size();i++){
@@ -140,15 +140,20 @@ public class GameView extends View {
 		
 		//jets
 		for(int i = 0; i< jets.size();i++){
+		   if(jets.get(i).getX() < rocketgame.getRocket().getX() && jets.get(i).getX() + 600 > rocketgame.getRocket().getX() && jets.get(i).getY() + 252 > rocketgame.getRocket().getY() && jets.get(i).getY()+252 < rocketgame.getRocket().getY()+10){
+               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - 10);
+           }  
 			if(jets.get(i).getY() < height){
 				jets.get(i).setY(jets.get(i).getY() + 7);
-				jets.get(i).setX((int) (jets.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 1));
+				jets.get(i).setX((int) (jets.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
                 canvas.drawBitmap(jets.get(i).getImage(), jets.get(i).getX(), jets.get(i).getY(), p);
             }else{
             	jets.remove(i);
             	i--;
             }
 		}
+		
+
 		
 
 		
