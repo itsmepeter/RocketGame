@@ -180,19 +180,22 @@ public class GameView extends View {
 						GameActivity activity = (GameActivity) context;
 						activity.hitJetSound(i);
 					}
-
-				}
-				if (jets.get(i).getY() < height) {
-					jets.get(i).setY(jets.get(i).getY() + 7);
-					jets.get(i)
-							.setX((int) (jets.get(i).getX()
-									+ rocketgame.getRocket().getRotation() / 10 + 3));
-					canvas.drawBitmap(jets.get(i).getImage(), jets.get(i)
-							.getX(), jets.get(i).getY(), p);
-				} else {
 					jets.remove(i);
-					i--;
+
+				} else {
+					if (jets.get(i).getY() < height) {
+						jets.get(i).setY(jets.get(i).getY() + 7);
+						jets.get(i)
+								.setX((int) (jets.get(i).getX()
+										+ rocketgame.getRocket().getRotation() / 10 + 3));
+						canvas.drawBitmap(jets.get(i).getImage(), jets.get(i)
+								.getX(), jets.get(i).getY(), p);
+					} else {
+						jets.remove(i);
+						i--;
+					}
 				}
+			
 			}
 
 			// birds
@@ -214,18 +217,21 @@ public class GameView extends View {
 						activity.hitBirdSound(i);
 					}
 					birds.get(i).setDmg(0);
-				}
-				if (birds.get(i).getY() < height) {
-					birds.get(i).setY(birds.get(i).getY() + 7);
-					birds.get(i)
-							.setX((int) (birds.get(i).getX()
-									+ rocketgame.getRocket().getRotation() / 10 + 3));
-					canvas.drawBitmap(birds.get(i).getImage(), birds.get(i)
-							.getX(), birds.get(i).getY(), p);
-				} else {
 					birds.remove(i);
-					i--;
+				} else {
+					if (birds.get(i).getY() < height) {
+						birds.get(i).setY(birds.get(i).getY() + 7);
+						birds.get(i)
+								.setX((int) (birds.get(i).getX()
+										+ rocketgame.getRocket().getRotation() / 10 + 3));
+						canvas.drawBitmap(birds.get(i).getImage(), birds.get(i)
+								.getX(), birds.get(i).getY(), p);
+					} else {
+						birds.remove(i);
+						i--;
+					}
 				}
+				
 			}
 
 			for (int i = 0; i < stars.size(); i++) {
