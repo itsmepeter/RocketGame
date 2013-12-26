@@ -104,7 +104,7 @@ public class GameView extends View {
 		cloud3 = Bitmap.createScaledBitmap(oldcloud3, (int) 200, (int) 200,true);
 		cloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 200, (int) 200,true);
 		jet = Bitmap.createScaledBitmap(oldplane, (int) 200, (int) 200, true);
-		bird = Bitmap.createScaledBitmap(oldbird, (int) 200, (int) 200, true);
+		bird = Bitmap.createScaledBitmap(oldbird, (int) 60, (int) 60, true);
 
 	}
 
@@ -174,7 +174,7 @@ public class GameView extends View {
 		
 		//birds
 				for(int i = 0; i< birds.size();i++){
-				   if(birds.get(i).getX() < rocketgame.getRocket().getX() && birds.get(i).getX() + 600 > rocketgame.getRocket().getX() && birds.get(i).getY() + 252 > rocketgame.getRocket().getY() && birds.get(i).getY()+252 < rocketgame.getRocket().getY()+10){
+				   if(birds.get(i).getX() < rocketgame.getRocket().getX() && birds.get(i).getX() + 60 > rocketgame.getRocket().getX() && birds.get(i).getY() + 60 > rocketgame.getRocket().getY() && birds.get(i).getY()+60 < rocketgame.getRocket().getY()+10){
 		               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
 		               birds.get(i).setDmg(0);
 		               if(context instanceof GameActivity)
