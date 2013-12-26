@@ -18,5 +18,7 @@
     <string name="upgrades">Upgrades</string>
     <color name="MenuHeaderBackgroundColor">#FF1919</color>
     <color name="ButtonBackgroundColor">#424242</color>
+    <string name="ButtonGameOver">Shop</string>
+    <string name="GameOver">Game Over</string>
 
 </resources>
