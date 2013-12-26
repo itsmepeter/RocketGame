@@ -92,14 +92,11 @@ public class GameActivity extends Activity {
 		    	   int y = -250;
 		    	   Jet jet = new Jet(randomx, y, gameview.jet, 0);
 			       gameview.jets.add(jet);
-			    }
-		       
-		       //birds
-		       if(obstaclerandom < 0.90 && gameview.birds.size() < 1 && gameview.rocketgame.getHeight() > 50 && gameview.rocketgame.getHeight() < 7500){
-		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
-		    	   int y = -250;
-		    	   Bird bird = new Bird(randomx, y, gameview.bird, 0);
-			       gameview.birds.add(bird);
+			    } else if(obstaclerandom > 0.90  && gameview.birds.size() < 5 && gameview.rocketgame.getHeight() > 50 && gameview.rocketgame.getHeight() < 7500 ){
+			    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
+			    	   int y = -250;
+			    	   Bird bird = new Bird(randomx, y, gameview.bird, 0);
+				       gameview.birds.add(bird);
 			    }
 		       
 		    };
