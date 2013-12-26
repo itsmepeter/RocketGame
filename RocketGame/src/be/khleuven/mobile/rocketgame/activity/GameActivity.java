@@ -1,5 +1,6 @@
 package be.khleuven.mobile.rocketgame.activity;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,6 +11,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.WindowManager;
 import be.khleuven.mobile.rocketgame.R;
@@ -21,6 +23,8 @@ public class GameActivity extends Activity {
 	GameView gameview;
 	private Timer cloudtimer;
 	private TimerTask refresher;
+	
+	private MediaPlayer mediaplayer;
 
 	private SensorManager mSensorManager;
 	private float x; // acceleration apart from gravity
@@ -101,6 +105,19 @@ public class GameActivity extends Activity {
 
 	public void initialiseerImages() {
 
+	}
+	
+	public void hitJetSound(int i){
+		mediaplayer = MediaPlayer.create(this, R.raw.hit1);
+		if(gameview.jets.get(i).getDmg() == 10){
+			try {
+				mediaplayer.prepare();
+				mediaplayer.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+
+		}
 	}
 
 }

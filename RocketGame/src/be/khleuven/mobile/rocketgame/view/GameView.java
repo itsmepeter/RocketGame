@@ -3,6 +3,7 @@ package be.khleuven.mobile.rocketgame.view;
 import java.util.ArrayList;
 
 import be.khleuven.mobile.rocketgame.R;
+import be.khleuven.mobile.rocketgame.activity.GameActivity;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.RocketGame;
@@ -13,6 +14,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -41,10 +43,13 @@ public class GameView extends View {
 
 	// paints
 	private Paint p;
-
+	
+	//context
+	private Context context;
+	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs, 0);
-
+		this.context = context;
 		p = new Paint();
 		rocketgame = new RocketGame();
 
@@ -141,7 +146,14 @@ public class GameView extends View {
 		//jets
 		for(int i = 0; i< jets.size();i++){
 		   if(jets.get(i).getX() < rocketgame.getRocket().getX() && jets.get(i).getX() + 600 > rocketgame.getRocket().getX() && jets.get(i).getY() + 252 > rocketgame.getRocket().getY() && jets.get(i).getY()+252 < rocketgame.getRocket().getY()+10){
-               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - 10);
+               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - jets.get(i).getDmg());
+               jets.get(i).setDmg(0);
+               if(context instanceof GameActivity)
+               {
+            	   GameActivity activity = (GameActivity)context;
+                   activity.hitJetSound(i);
+               }
+               
            }  
 			if(jets.get(i).getY() < height){
 				jets.get(i).setY(jets.get(i).getY() + 7);
