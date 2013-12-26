@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.activity.GameActivity;
+import be.khleuven.mobile.rocketgame.model.Bird;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.RocketGame;
@@ -27,6 +28,7 @@ public class GameView extends View {
 	public Bitmap cloud3;
 	public Bitmap cloud4;
 	public Bitmap jet;
+	public Bitmap bird;
 	
 
 	// Rocket
@@ -39,6 +41,7 @@ public class GameView extends View {
 	public ArrayList<Cloud>toberemoved = new ArrayList<Cloud>();
 
 	public ArrayList<Jet> jets = new ArrayList<Jet>();
+	public ArrayList<Bird> birds = new ArrayList<Bird>();
 
 
 	// paints
@@ -70,6 +73,8 @@ public class GameView extends View {
 				R.drawable.cloud4);
 		
 		jet = BitmapFactory.decodeResource(getResources(), R.drawable.plane);
+		
+		bird = BitmapFactory.decodeResource(getResources(), R.drawable.bird);
 
 	}
 
@@ -89,15 +94,17 @@ public class GameView extends View {
 		Bitmap oldcloud3 = cloud3;
 		Bitmap oldcloud4 = cloud4;
 		Bitmap oldplane = jet;
+		Bitmap oldbird = bird;
 		
 		//HIER ZOU EIGENLIJK ALLES GESCALED MOETEN WORDEN MAAR IK BEN EEN NOOB IN WISKUNDE
 		
 		bmprocket = Bitmap.createScaledBitmap(oldrocket, (int) 85, (int) 150,true);
-		cloud1 = Bitmap.createScaledBitmap(oldcloud1, (int) 200, (int) 200,true);;
-		cloud2 = Bitmap.createScaledBitmap(oldcloud2, (int) 200, (int) 200,true);;
-		cloud3 = Bitmap.createScaledBitmap(oldcloud3, (int) 200, (int) 200,true);;
-		cloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 200, (int) 200,true);;
-		jet = Bitmap.createScaledBitmap(oldplane, (int) 200, (int) 200, true);;
+		cloud1 = Bitmap.createScaledBitmap(oldcloud1, (int) 200, (int) 200,true);
+		cloud2 = Bitmap.createScaledBitmap(oldcloud2, (int) 200, (int) 200,true);
+		cloud3 = Bitmap.createScaledBitmap(oldcloud3, (int) 200, (int) 200,true);
+		cloud4 = Bitmap.createScaledBitmap(oldcloud4, (int) 200, (int) 200,true);
+		jet = Bitmap.createScaledBitmap(oldplane, (int) 200, (int) 200, true);
+		bird = Bitmap.createScaledBitmap(oldbird, (int) 200, (int) 200, true);
 
 	}
 
@@ -151,7 +158,7 @@ public class GameView extends View {
                if(context instanceof GameActivity)
                {
             	   GameActivity activity = (GameActivity)context;
-                   activity.hitJetSound(i);
+            	   activity.hitJetSound(i);
                }
                
            }  
@@ -164,6 +171,30 @@ public class GameView extends View {
             	i--;
             }
 		}
+		
+		//birds
+				for(int i = 0; i< birds.size();i++){
+				   if(birds.get(i).getX() < rocketgame.getRocket().getX() && birds.get(i).getX() + 600 > rocketgame.getRocket().getX() && birds.get(i).getY() + 252 > rocketgame.getRocket().getY() && birds.get(i).getY()+252 < rocketgame.getRocket().getY()+10){
+		               rocketgame.getRocket().setHealth(rocketgame.getRocket().getHealth() - birds.get(i).getDmg());
+		               birds.get(i).setDmg(0);
+		               if(context instanceof GameActivity)
+		               {
+		            	   GameActivity activity = (GameActivity)context;
+		                   
+		                   activity.hitBirdSound(i);
+		               }
+		               
+		           }  
+					if(birds.get(i).getY() < height){
+						birds.get(i).setY(birds.get(i).getY() + 7);
+						birds.get(i).setX((int) (birds.get(i).getX() + rocketgame.getRocket().getRotation()/10 + 3));
+		                canvas.drawBitmap(birds.get(i).getImage(), birds.get(i).getX(), birds.get(i).getY(), p);
+		            }else{
+		            	birds.remove(i);
+		            	i--;
+		            }
+				}
+				
 		
 
 		

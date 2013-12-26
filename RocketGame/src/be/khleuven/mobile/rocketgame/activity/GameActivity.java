@@ -13,8 +13,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import be.khleuven.mobile.rocketgame.R;
+import be.khleuven.mobile.rocketgame.model.Bird;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.view.GameView;
@@ -91,6 +93,15 @@ public class GameActivity extends Activity {
 		    	   Jet jet = new Jet(randomx, y, gameview.jet, 0);
 			       gameview.jets.add(jet);
 			    }
+		       
+		       //birds
+		       if(obstaclerandom < 0.90 && gameview.birds.size() < 1 && gameview.rocketgame.getHeight() > 50 && gameview.rocketgame.getHeight() < 7500){
+		    	   int randomx = (int) ((-1*gameview.width) + (Math.random()*gameview.width*2));
+		    	   int y = -250;
+		    	   Bird bird = new Bird(randomx, y, gameview.bird, 0);
+			       gameview.birds.add(bird);
+			    }
+		       
 		    };
 		};
 		// first event immediately,  following after 1 seconds each
@@ -113,6 +124,21 @@ public class GameActivity extends Activity {
 			try {
 				mediaplayer.prepare();
 				mediaplayer.start();
+				Log.v("004", "sound please");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+
+		}
+	}
+	
+	public void hitBirdSound(int i){
+		mediaplayer = MediaPlayer.create(this, R.raw.hit1);
+		if(gameview.birds.get(i).getDmg() == 10){
+			try {
+				mediaplayer.prepare();
+				mediaplayer.start();
+				Log.v("004", "sound please");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
