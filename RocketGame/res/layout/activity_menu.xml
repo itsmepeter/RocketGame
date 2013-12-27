@@ -55,7 +55,8 @@
         android:background="#CCCCCC"
         android:onClick="onClickStart"
         android:text="@string/start" />
-
+    
+    
     <Button
         android:id="@+id/btnOptions"
         android:layout_width="match_parent"
@@ -75,15 +76,28 @@
         android:layout_marginTop="19dp"
         android:background="#CCCCCC"
         android:text="@string/achievements" />
-
+    
     <Button
-        android:id="@+id/btnHighScores"
+        android:id="@+id/sign_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAchievements"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="22dp"
+        android:text="Sign In"
+        android:background="#CCCCCC" />
+
+    <!-- sign-out button -->
+
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAchievements"
+        android:layout_marginTop="22dp"
+        android:text="Sign Out"
         android:background="#CCCCCC"
-        android:text="@string/highscores" />
+        android:visibility="gone" />
+
+   
 
 </RelativeLayout>

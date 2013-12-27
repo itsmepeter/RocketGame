@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_id">87274999696</string>
+    <string name="achievement_mile_high_club">CgkIkJ_7j8UCEAIQBA</string>
+  	<string name="achievement_10_kilometers_yolo">CgkIkJ_7j8UCEAIQBQ</string>
+  	<string name="achievement_kill_all_the_twitter_birds">CgkIkJ_7j8UCEAIQBg</string>
+  	<string name="achievement_50k_get">CgkIkJ_7j8UCEAIQBw</string>
+  	<string name="achievement_100km_get_a_life">CgkIkJ_7j8UCEAIQCA</string>
+  	<string name="leaderboard_highest_distance_android">CgkIkJ_7j8UCEAIQAA</string>
+  	<string name="leaderboard_highest_distance_web">CgkIkJ_7j8UCEAIQAQ</string>
+</resources>
+
