@@ -5,18 +5,27 @@ import java.util.ArrayList;
 public class Rocket {
 	private int x;
 	private int y;
-	private int speed;
+	private double speed;
 	private float speedx;
 	private double rotation;
 	private float rotationspeed;
 	private int health;
+	private int fuel;
 	private ArrayList<Upgrade> upgrades;
-	//public Matrix rotator;
 	
 	public Rocket(){
 		setHealth(100);
 		rotation = 0;
-		//rotator = new Matrix();
+		setFuel(1000);
+		setSpeed(0);
+	}
+	
+	public int getFuel(){
+		return fuel;
+	}
+	
+	public void setFuel(int fuel){
+		this.fuel = fuel;
 	}
 	
 	public int getX() {
@@ -31,11 +40,11 @@ public class Rocket {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setSpeed(double d) {
+		this.speed = d;
 	}
 	
 	public float getSpeedX(){
@@ -53,56 +62,9 @@ public class Rocket {
 		return rotation;
 	}
 	
-	/*
-	public Matrix getRotator(){
-		return rotator;
-	}*/
-	
 	public void setRotation(double rotation){
 		this.rotation = rotation;
 	}
-	
-	/*
-	public void setRotation(int rocketwidth, int rocketheight){
-		double r =  -getRotationspeed();
-		rotator.postRotate(0);
-		/*if(r > 0 && r < 0.5){
-			if(rotation + 0.5 <= 45 && rotation + 0.5 >= -45){
-				rotator.postRotate((float) 0.5);
-				rotation += 0.5;
-			}
-		} else if (r < 0 && r > -0.5) {
-			if(rotation - 0.5 <= 45 && rotation -0.5 >= -45){
-				rotation -= 0.5;
-				rotator.postRotate((float) -0.5);
-			}
-		} else if (r < -0.5) {
-				if(rotation - 3 <= 45 && rotation -3 >= -45){
-					rotation -= 3;
-					rotator.postRotate((float) -3);
-				}
-		} else if (r > 0.5) {
-			if(rotation + 3 <= 45 && rotation  +3 >= -45){
-				rotation += 3;
-				rotator.postRotate((float) 3);
-			}
-		}
-
-		if(r > 0 ){
-			if(rotation + r*10 <= 45 && rotation + r*10 >= -45){
-				rotator.setTranslate(x, y);
-				rotator.postRotate((float) r*10, getX() + rocketwidth/2 ,  getY() + rocketheight/2);
-				rotation += r*10;
-			}
-		} else if (r < 0 ) {
-			if(rotation + r*10 <= 45 && rotation +r*10 >= -45){
-				rotator.setTranslate(x, y);
-				rotation += r*10;			
-				rotator.postRotate((float) r*10 , getX() + rocketwidth/2 ,  getY() + rocketheight/2);
-			}
-		} 
-	}	
-	*/
 	
 	public ArrayList<Upgrade> getUpgrades() {
 		return upgrades;

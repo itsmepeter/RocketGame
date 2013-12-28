@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class GameView extends View {
@@ -117,8 +118,24 @@ public class GameView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		if (rocketgame.getRocket().getHealth() > 0) {
-			rocketgame.setHeight(rocketgame.getHeight() + 1);
+		if (rocketgame.getRocket().getHealth() > 0 && rocketgame.getRocket().getSpeed() > -10) {
+			if(rocketgame.getTouching() == true && rocketgame.getRocket().getFuel() > 0 ){
+		    	if(rocketgame.getRocket().getSpeed() < 30 && rocketgame.getRocket().getFuel() > 0){
+		    	  	rocketgame.getRocket().setSpeed(rocketgame.getRocket().getSpeed() + 0.2);	
+		    	}
+		    	rocketgame.getRocket().setFuel((int) (rocketgame.getRocket().getFuel() - 1));
+		    } else if (rocketgame.getTouching() == false && rocketgame.getRocket().getSpeed() > -10 && rocketgame.getHeight() > 0){
+		    		rocketgame.getRocket().setSpeed(rocketgame.getRocket().getSpeed() - 0.3);
+		    }
+			rocketgame.setHeight((rocketgame.getHeight() + rocketgame.getRocket().getSpeed()/60));			
+			if (context instanceof GameActivity) {
+				GameActivity activity = (GameActivity) context;
+				if (activity.isSignedIn() && rocketgame.getBirds_hit() == 9) {
+			        activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_kill_all_the_twitter_birds));
+			      }
+			}
+			
+			
 
 			canvas.drawColor(Color.BLUE);
 
@@ -131,13 +148,17 @@ public class GameView extends View {
 			if (rocketgame.getRocket().getY() == 0) {
 				rocketgame.getRocket().setX(
 						(width / 2) - bmprocket.getWidth() / 2);
-				rocketgame.getRocket().setY(height + bmprocket.getHeight() / 2);
+				rocketgame.getRocket().setY(height - bmprocket.getHeight());
 
 			}
 
 			// startanimatie
-			if (rocketgame.getRocket().getY() > (0.70 * height)) {
+			if (rocketgame.getRocket().getY() > (0.60 * height) && rocketgame.getTouching() == true) {
 				rocketgame.getRocket().setY(rocketgame.getRocket().getY() - 1);
+			}
+
+			if(rocketgame.getRocket().getFuel() < 0){
+				rocketgame.getRocket().setY(rocketgame.getRocket().getY() + 1);
 			}
 
 			canvas.drawBitmap(bmprocket, generateRotationMatrix(), p);
@@ -146,16 +167,18 @@ public class GameView extends View {
 			canvas.drawText("HEALTH: "
 					+ (int) rocketgame.getRocket().getHealth(), 10, 40, p);
 			canvas.drawText("MONEY: " + (int) rocketgame.getMoney(), 10, 60, p);
+			canvas.drawText("SPEED: " + (int) rocketgame.getRocket().getSpeed(), 10, 80, p);
+			canvas.drawText("FUEL: " + (int) rocketgame.getRocket().getFuel(), 10, 100, p);
 
 			// clouds
 			for (int i = 0; i < clouds.size(); i++) {
 				if (clouds.get(i).getY() < height) {
-					clouds.get(i).setY(clouds.get(i).getY() + 7);
+                    clouds.get(i).setY((clouds.get(i).getY() +  rocketgame.getRocket().getSpeed()/4));
 					clouds.get(i)
 							.setX((int) (clouds.get(i).getX()
 									+ rocketgame.getRocket().getRotation() / 10 + 1));
 					canvas.drawBitmap(clouds.get(i).getImage(), clouds.get(i)
-							.getX(), clouds.get(i).getY(), p);
+							.getX(), (float) clouds.get(i).getY(), p);
 				} else {
 					clouds.remove(i);
 					i--;
@@ -184,12 +207,12 @@ public class GameView extends View {
 
 				} else {
 					if (jets.get(i).getY() < height) {
-						jets.get(i).setY(jets.get(i).getY() + 7);
+                        jets.get(i).setY((jets.get(i).getY() +  rocketgame.getRocket().getSpeed()/4));
 						jets.get(i)
 								.setX((int) (jets.get(i).getX()
 										+ rocketgame.getRocket().getRotation() / 10 + 3));
 						canvas.drawBitmap(jets.get(i).getImage(), jets.get(i)
-								.getX(), jets.get(i).getY(), p);
+								.getX(), (float) jets.get(i).getY(), p);
 					} else {
 						jets.remove(i);
 						i--;
@@ -218,14 +241,15 @@ public class GameView extends View {
 					}
 					birds.get(i).setDmg(0);
 					birds.remove(i);
+					rocketgame.setBirds_hit(rocketgame.getBirds_hit()+1);
 				} else {
 					if (birds.get(i).getY() < height) {
-						birds.get(i).setY(birds.get(i).getY() + 7);
+                        birds.get(i).setY((birds.get(i).getY() +  rocketgame.getRocket().getSpeed()/4));
 						birds.get(i)
 								.setX((int) (birds.get(i).getX()
 										+ rocketgame.getRocket().getRotation() / 10 + 3));
 						canvas.drawBitmap(birds.get(i).getImage(), birds.get(i)
-								.getX(), birds.get(i).getY(), p);
+								.getX(), (float) birds.get(i).getY(), p);
 					} else {
 						birds.remove(i);
 						i--;
@@ -233,6 +257,7 @@ public class GameView extends View {
 				}
 				
 			}
+			
 
 			for (int i = 0; i < stars.size(); i++) {
 				if (stars.get(i).getX() + star.getWidth() / 2 < rocketgame
@@ -252,13 +277,13 @@ public class GameView extends View {
 					}
 
 				} else {
-					if (stars.get(i).getY() < height) {
-						stars.get(i).setY(stars.get(i).getY() + 10);
+					if (stars.get(i).getY() < height && rocketgame.getHeight() > 0) {
+                        stars.get(i).setY((stars.get(i).getY() + 5 +  rocketgame.getRocket().getSpeed()/4));
 						stars.get(i).setX(
 								(int) (stars.get(i).getX() + rocketgame
 										.getRocket().getRotation() / 10));
 						canvas.drawBitmap(stars.get(i).getImage(), stars.get(i)
-								.getX(), stars.get(i).getY(), p);
+								.getX(), (float) stars.get(i).getY(), p);
 					} else {
 						stars.remove(i);
 						i--;
@@ -267,7 +292,7 @@ public class GameView extends View {
 			}
 
 			invalidate();
-			// rocket.recycle();
+			
 		} else {
 			if (context instanceof GameActivity) {
 				GameActivity activity = (GameActivity) context;
@@ -285,5 +310,16 @@ public class GameView extends View {
 		matrix.preRotate((float) -rocketgame.getRocket().getRotation(),
 				bmprocket.getWidth() / 2, bmprocket.getHeight() / 2);
 		return matrix;
+	}
+	
+	@Override 
+	public boolean onTouchEvent(MotionEvent event){
+		   if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+			    rocketgame.setTouching(true);
+			    rocketgame.setPlaying(true);
+		    } else if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+		    	rocketgame.setTouching(false);
+		    }
+		return true;	
 	}
 }

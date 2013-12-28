@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 public abstract class SpaceObject {
 	private int x;
-	private int y;
+	private double y;
 	private int width;
 	private Bitmap image;
 	
@@ -21,11 +21,11 @@ public abstract class SpaceObject {
 	public void setX(int x) {
 		this.x = x;
 	}
-	public int getY() {
+	public double getY() {
 		return y;
 	}
-	public void setY(int y) {
-		this.y = y;
+	public void setY(double d) {
+		this.y = d;
 	}
 	public Bitmap getImage() {
 		return image;

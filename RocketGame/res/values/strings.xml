@@ -20,5 +20,6 @@
     <color name="ButtonBackgroundColor">#424242</color>
     <string name="ButtonGameOver">Return To Shop</string>
     <string name="GameOver">Game Over</string>
-
+    <string name="SignIn">Sign In</string>
+	<string name="SignOut">Sign Out</string>
 </resources>

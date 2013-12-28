@@ -7,7 +7,10 @@ public class RocketGame {
 	private int money;
 	private String username;
 	private ArrayList<Powerup> powerups;
-	private int height;
+	private double height;
+	private int birds_hit;
+	private boolean touching;
+	private boolean playing;
 	
 
 	public RocketGame(){
@@ -28,6 +31,14 @@ public class RocketGame {
 
 	public void setRocket(Rocket rocket) {
 		this.rocket = rocket;
+	}	
+
+	public boolean getTouching(){
+		return touching;
+	}
+	
+	public void setTouching(boolean touching){
+		this.touching = touching;
 	}
 
 	public int getMoney() {
@@ -54,12 +65,28 @@ public class RocketGame {
 		return powerups;
 	}
 
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setHeight(double d) {
+		this.height = d;
+	}
+
+	public int getBirds_hit() {
+		return birds_hit;
+	}
+
+	public void setBirds_hit(int birds_hit) {
+		this.birds_hit = birds_hit;
+	}
+
+	public void setPlaying(boolean b) {
+		this.playing = true;
+	}
+	
+	public boolean getPlaying(){
+		return this.playing;
 	}
 
 }

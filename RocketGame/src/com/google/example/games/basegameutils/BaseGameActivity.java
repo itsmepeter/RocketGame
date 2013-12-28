@@ -132,7 +132,7 @@ public abstract class BaseGameActivity extends FragmentActivity implements
         mHelper.onActivityResult(request, response, data);
     }
 
-    protected GamesClient getGamesClient() {
+    public GamesClient getGamesClient() {
         return mHelper.getGamesClient();
     }
 
@@ -144,7 +144,7 @@ public abstract class BaseGameActivity extends FragmentActivity implements
         return mHelper.getPlusClient();
     }
 
-    protected boolean isSignedIn() {
+    public boolean isSignedIn() {
         return mHelper.isSignedIn();
     }
 

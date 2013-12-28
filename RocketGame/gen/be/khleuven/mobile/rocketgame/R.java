@@ -280,17 +280,15 @@ containing a value of this type.
         public static final int GameName2=0x7f08002b;
         public static final int GameName3=0x7f08002c;
         public static final int GameOver=0x7f080035;
+        public static final int SignIn=0x7f080036;
+        public static final int SignOut=0x7f080037;
         public static final int achievement_100km_get_a_life=0x7f080023;
         public static final int achievement_10_kilometers_yolo=0x7f080020;
         public static final int achievement_50k_get=0x7f080022;
         public static final int achievement_kill_all_the_twitter_birds=0x7f080021;
-        /**  TODO: Replace this with Simple API access / Key for Android apps (with certificates) for YT API v3 
-         */
         public static final int achievement_mile_high_club=0x7f08001f;
         public static final int achievements=0x7f08002f;
         public static final int action_settings=0x7f080027;
-        /**  TODO: Replace this by your app's app ID! 
-         */
         public static final int app_id=0x7f08001e;
         public static final int app_name=0x7f080026;
         /**   Title for notification shown when GooglePlayServices needs to be

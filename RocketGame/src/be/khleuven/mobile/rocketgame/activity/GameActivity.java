@@ -3,7 +3,8 @@ package be.khleuven.mobile.rocketgame.activity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
+import com.google.example.games.basegameutils.BaseGameActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -24,7 +25,7 @@ import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.Money;
 import be.khleuven.mobile.rocketgame.view.GameView;
 
-public class GameActivity extends Activity {
+public class GameActivity extends BaseGameActivity {
 	GameView gameview;
 	private Timer cloudtimer;
 	private TimerTask refresher;
@@ -36,17 +37,19 @@ public class GameActivity extends Activity {
 	private final SensorEventListener mSensorListener = new SensorEventListener() {
 
 		public void onSensorChanged(SensorEvent se) {
-			x = se.values[0];
-			float rotationmodifier = x / 2;
-			float newrotation = (float) (gameview.rocketgame.getRocket()
-					.getRotation() + rotationmodifier);
-			float newX = (float) (gameview.rocketgame.getRocket().getX() - gameview.rocketgame
-					.getRocket().getRotation() / 10);
-			if (newrotation < 45 && newrotation > -45) {
-				gameview.rocketgame.getRocket().setRotation(newrotation);
-			}
-			if (newX < 0.65 * gameview.width && newX > 0.1 * gameview.width) {
-				gameview.rocketgame.getRocket().setX((int) newX);
+			if(gameview.rocketgame.getPlaying()){
+				x = se.values[0];
+				float rotationmodifier = x / 2;
+				float newrotation = (float) (gameview.rocketgame.getRocket()
+						.getRotation() + rotationmodifier);
+				float newX = (float) (gameview.rocketgame.getRocket().getX() - gameview.rocketgame
+						.getRocket().getRotation() / 10);
+				if (newrotation < 45 && newrotation > -45) {
+					gameview.rocketgame.getRocket().setRotation(newrotation);
+				}
+				if (newX < 0.65 * gameview.width && newX > 0.1 * gameview.width) {
+					gameview.rocketgame.getRocket().setX((int) newX);
+				}
 			}
 		}
 
@@ -204,6 +207,16 @@ public class GameActivity extends Activity {
 		myIntent.putExtra("height", gameview.rocketgame.getHeight());
 		myIntent.putExtra("money", gameview.rocketgame.getMoney());
 		startActivityForResult(myIntent, 0);
+	}
+
+	@Override
+	public void onSignInFailed() {
+		
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		
 	}
 
 }

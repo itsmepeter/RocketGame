@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAchievements"
         android:layout_marginTop="22dp"
-        android:text="Sign In"
+        android:text="@string/SignIn"
         android:background="#CCCCCC" />
 
     <!-- sign-out button -->
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAchievements"
         android:layout_marginTop="22dp"
-        android:text="Sign Out"
+        android:text="@string/SignOut"
         android:background="#CCCCCC"
         android:visibility="gone" />
 
