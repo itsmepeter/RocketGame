@@ -226,12 +226,14 @@ containing a value of this type.
         public static final int ic_plusone_standard_off_client=0x7f020025;
         public static final int ic_plusone_tall_off_client=0x7f020026;
         public static final int left_wing=0x7f020027;
-        public static final int nose=0x7f020028;
-        public static final int plane=0x7f020029;
-        public static final int right_wing=0x7f02002a;
-        public static final int rocket=0x7f02002b;
-        public static final int star=0x7f02002c;
-        public static final int window=0x7f02002d;
+        public static final int meteor1=0x7f020028;
+        public static final int meteor2=0x7f020029;
+        public static final int nose=0x7f02002a;
+        public static final int plane=0x7f02002b;
+        public static final int right_wing=0x7f02002c;
+        public static final int rocket=0x7f02002d;
+        public static final int star=0x7f02002e;
+        public static final int window=0x7f02002f;
     }
     public static final class id {
         public static final int action_settings=0x7f070023;

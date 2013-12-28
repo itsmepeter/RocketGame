@@ -2,6 +2,7 @@ package be.khleuven.mobile.rocketgame.activity;
 
 import be.khleuven.mobile.rocketgame.R;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.Menu;
@@ -41,6 +42,7 @@ public class MenuActivity extends BaseGameActivity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		super.onCreate(savedInstanceState);
+		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		setContentView(R.layout.activity_menu);
 

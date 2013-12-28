@@ -25,6 +25,7 @@ import be.khleuven.mobile.rocketgame.model.Bird;
 import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.Money;
+import be.khleuven.mobile.rocketgame.model.Meteor;
 import be.khleuven.mobile.rocketgame.view.GameView;
 
 public class GameActivity extends BaseGameActivity {
@@ -66,8 +67,7 @@ public class GameActivity extends BaseGameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		//AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-		//audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
+		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		
 		SharedPreferences prefs = this.getSharedPreferences("be.khleuven.mobile.rocketgame", Context.MODE_PRIVATE);
 
@@ -135,6 +135,23 @@ public class GameActivity extends BaseGameActivity {
 					gameview.stars.add(money);
 
 				}
+				
+				// meteors
+                double meteors = Math.random();
+                if (meteors < 0.2 && gameview.getHeight() > 17000
+                        && gameview.clouds.size() <= 5) {
+                    double meteorsrandom2 = Math.random();
+                    int randomx = (int) ((-1 * gameview.width) + (Math.random()
+                            * gameview.width * 2));
+                    int y = -250;
+                    Meteor meteor;
+                    if (meteorsrandom2 < 0.50) {
+                        meteor = new Meteor(randomx, y, gameview.meteor, 0);
+                    } else {
+                        meteor = new Meteor(randomx, y, gameview.meteor2, 0);
+                    }
+                    gameview.meteors.add(meteor);
+                }
 			};
 		};
 		// first event immediately, following after 1 seconds each

@@ -1,8 +1,7 @@
 package be.khleuven.mobile.rocketgame.activity;
 
 import be.khleuven.mobile.rocketgame.R;
-import be.khleuven.mobile.rocketgame.view.GameView;
-
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -22,7 +21,8 @@ public class ShopActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		        
@@ -100,7 +100,7 @@ public class ShopActivity extends Activity {
 	}
 	
 	public void onclickFuel(View view){
-		int money = Integer.parseInt(prefs.getString("money", "0"));
+		int money = prefs.getInt("money", 0);
 		if(money > prefs.getInt("fuel", 1000)){
 			savePreferences("money", money - prefs.getInt("fuel", 1000));
 			savePreferences("fuel", prefs.getInt("fuel", 1000)+1000);
@@ -112,7 +112,7 @@ public class ShopActivity extends Activity {
 	}
 	
 	public void onclickHealth(View view){
-		int money = Integer.parseInt(prefs.getString("money", "0"));
+		int money = prefs.getInt("money", 0);
 		if(money > prefs.getInt("health", 100)*10){
 			savePreferences("money", money - prefs.getInt("health", 100)*10);
 			savePreferences("health", prefs.getInt("health", 100)+10);
@@ -123,7 +123,7 @@ public class ShopActivity extends Activity {
 	}
 	
 	public void onclickEngine(View view){
-		int money = Integer.parseInt(prefs.getString("money", "0"));
+		int money = prefs.getInt("money", 0);
 		if(money > prefs.getInt("engine",30)*30){
 			savePreferences("money", money - prefs.getInt("engine",30)*30);
 			savePreferences("engine", prefs.getInt("engine",30)+10);

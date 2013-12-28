@@ -11,6 +11,7 @@ import be.khleuven.mobile.rocketgame.model.Cloud;
 import be.khleuven.mobile.rocketgame.model.Jet;
 import be.khleuven.mobile.rocketgame.model.Money;
 import be.khleuven.mobile.rocketgame.model.RocketGame;
+import be.khleuven.mobile.rocketgame.model.Meteor;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +34,8 @@ public class GameView extends View {
 	public Bitmap jet;
 	public Bitmap bird;
 	public Bitmap star;
+	public Bitmap meteor;
+	public Bitmap meteor2;
 
 	// Rocket
 	public RocketGame rocketgame;
@@ -47,6 +50,8 @@ public class GameView extends View {
 	public ArrayList<Bird> birds = new ArrayList<Bird>();
 
 	public ArrayList<Money> stars = new ArrayList<Money>();
+	
+	public ArrayList<Meteor> meteors = new ArrayList<Meteor>();
 
 	// paints
 	private Paint p;
@@ -81,6 +86,10 @@ public class GameView extends View {
 		bird = BitmapFactory.decodeResource(getResources(), R.drawable.bird);
 
 		star = BitmapFactory.decodeResource(getResources(), R.drawable.star);
+		
+		meteor = BitmapFactory.decodeResource(getResources(), R.drawable.meteor1);
+        
+        meteor2 = BitmapFactory.decodeResource(getResources(), R.drawable.meteor2);
 
 	}
 
@@ -99,6 +108,8 @@ public class GameView extends View {
 		Bitmap oldcloud4 = cloud4;
 		Bitmap oldplane = jet;
 		Bitmap oldbird = bird;
+		Bitmap oldmeteor = meteor;
+		Bitmap oldmeteor2 = meteor;
 
 		// HIER ZOU EIGENLIJK ALLES GESCALED MOETEN WORDEN MAAR IK BEN EEN NOOB
 		// IN WISKUNDE
@@ -115,6 +126,9 @@ public class GameView extends View {
 				true);
 		jet = Bitmap.createScaledBitmap(oldplane, (int) 200, (int) 200, true);
 		bird = Bitmap.createScaledBitmap(oldbird, (int) 60, (int) 60, true);
+		
+		meteor = Bitmap.createScaledBitmap(oldmeteor, 100, 100, true);
+        meteor2 = Bitmap.createScaledBitmap(oldmeteor2, 100, 100, true);
 
 	}
 
@@ -308,10 +322,46 @@ public class GameView extends View {
 					}
 				}
 			}
+			
+			// meteors
+            for (int i = 0; i < meteors.size(); i++) {
+                if (meteors.get(i).getX() + meteor.getWidth() / 2 < rocketgame
+                        .getRocket().getX() + bmprocket.getWidth()
+                        && meteors.get(i).getX() + meteor.getWidth() / 2 > rocketgame
+                                .getRocket().getX()
+                        && meteors.get(i).getY() + meteor.getHeight() / 2 > rocketgame
+                                .getRocket().getY()
+                        && meteors.get(i).getY() + meteor.getHeight() / 2 < rocketgame
+                                .getRocket().getY() + bmprocket.getHeight()) {
+                    rocketgame.getRocket().setHealth(
+                            rocketgame.getRocket().getHealth()
+                                    - meteors.get(i).getDmg());
+                    meteors.get(i).setDmg(0);
+                    if (context instanceof GameActivity) {
+                        GameActivity activity = (GameActivity) context;
+                        activity.hitJetSound(i);
+                    }
+                    meteors.remove(i);
 
+
+                } else {
+                    if (meteors.get(i).getY() < height) {
+                        meteors.get(i).setY((meteors.get(i).getY() +  rocketgame.getRocket().getSpeed()/4));
+                        meteors.get(i)
+                                .setX((int) (meteors.get(i).getX()
+                                        + rocketgame.getRocket().getRotation() / 10 + 3));
+                        canvas.drawBitmap(meteors.get(i).getImage(), meteors.get(i)
+                                .getX(), (float) meteors.get(i).getY(), p);
+                    } else {
+                        meteors.remove(i);
+                        i--;
+                    }
+                }
+            }
 			invalidate();
 			
 		} else {
+			rocketgame.setMoney((int) (rocketgame.getMoney() + rocketgame.getHeight()/10));
 			if (context instanceof GameActivity) {
 				GameActivity activity = (GameActivity) context;
 				activity.gameOver(this);
