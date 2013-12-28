@@ -12,12 +12,22 @@ public class Rocket {
 	private int health;
 	private int fuel;
 	private ArrayList<Upgrade> upgrades;
+	private double enginespeed;
+	private int fuellvl;
+	private int enginelvl;
+	private int healthlvl;
 	
 	public Rocket(){
-		setHealth(100);
 		rotation = 0;
-		setFuel(1000);
 		setSpeed(0);
+	}
+	
+	public double getEnginespeed(){
+		return enginespeed;
+	}
+	
+	public void setEngineSpeed(double enginespeed){
+		this.enginespeed = enginespeed;
 	}
 	
 	public int getFuel(){
@@ -96,5 +106,29 @@ public class Rocket {
 		
 		//x += speedx * seconden;
 		rotation += rotation + rotationspeed * seconden;
+	}
+
+	public int getFuellvl() {
+		return fuellvl;
+	}
+
+	public void setFuellvl(int fuellvl) {
+		this.fuellvl = fuellvl;
+	}
+
+	public int getEnginelvl() {
+		return enginelvl;
+	}
+
+	public void setEnginelvl(int enginelvl) {
+		this.enginelvl = enginelvl;
+	}
+
+	public int getHealthlvl() {
+		return healthlvl;
+	}
+
+	public void setHealthlvl(int healthlvl) {
+		this.healthlvl = healthlvl;
 	}
 }

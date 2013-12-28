@@ -2,6 +2,8 @@ package be.khleuven.mobile.rocketgame.view;
 
 import java.util.ArrayList;
 
+
+
 import be.khleuven.mobile.rocketgame.R;
 import be.khleuven.mobile.rocketgame.activity.GameActivity;
 import be.khleuven.mobile.rocketgame.model.Bird;
@@ -56,6 +58,7 @@ public class GameView extends View {
 		super(context, attrs, 0);
 		this.context = context;
 		p = new Paint();
+	
 		rocketgame = new RocketGame();
 
 		bmprocket = BitmapFactory.decodeResource(getResources(),
@@ -120,19 +123,34 @@ public class GameView extends View {
 		super.onDraw(canvas);
 		if (rocketgame.getRocket().getHealth() > 0 && rocketgame.getRocket().getSpeed() > -10) {
 			if(rocketgame.getTouching() == true && rocketgame.getRocket().getFuel() > 0 ){
-		    	if(rocketgame.getRocket().getSpeed() < 30 && rocketgame.getRocket().getFuel() > 0){
+		    	if(rocketgame.getRocket().getSpeed() < rocketgame.getRocket().getEnginespeed() && rocketgame.getRocket().getFuel() > 0){
 		    	  	rocketgame.getRocket().setSpeed(rocketgame.getRocket().getSpeed() + 0.2);	
-		    	}
+		    	} 
 		    	rocketgame.getRocket().setFuel((int) (rocketgame.getRocket().getFuel() - 1));
-		    } else if (rocketgame.getTouching() == false && rocketgame.getRocket().getSpeed() > -10 && rocketgame.getHeight() > 0){
-		    		rocketgame.getRocket().setSpeed(rocketgame.getRocket().getSpeed() - 0.3);
-		    }
-			rocketgame.setHeight((rocketgame.getHeight() + rocketgame.getRocket().getSpeed()/60));			
+			} else if (rocketgame.getRocket().getSpeed() > -10 && rocketgame.getHeight() > 0){
+			    		rocketgame.getRocket().setSpeed(rocketgame.getRocket().getSpeed() - 0.3);
+			}
+			rocketgame.setHeight((rocketgame.getHeight() + rocketgame.getRocket().getSpeed()/60));	
+			
 			if (context instanceof GameActivity) {
 				GameActivity activity = (GameActivity) context;
-				if (activity.isSignedIn() && rocketgame.getBirds_hit() == 9) {
-			        activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_kill_all_the_twitter_birds));
-			      }
+				if (activity.isSignedIn()){
+					if (rocketgame.getBirds_hit() == 9) {
+				        activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_kill_all_the_twitter_birds));
+				    }
+					if (rocketgame.getHeight() > 1000){
+						activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_mile_high_club));
+					}
+					if (rocketgame.getHeight() > 10000){
+						activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_10_kilometers_yolo));
+					}
+					if (rocketgame.getHeight() > 50000){
+						activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50k_get));
+					}
+					if (rocketgame.getHeight() > 100000){
+						activity.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_100km_get_a_life));
+					}
+				}
 			}
 			
 			

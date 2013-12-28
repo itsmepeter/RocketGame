@@ -58,20 +58,20 @@
     
     
     <Button
-        android:id="@+id/btnOptions"
+        android:id="@+id/btnHighscores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnMenuStart"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:background="#CCCCCC"
-        android:text="@string/options" />
+        android:text="@string/highscores" />
 
     <Button
         android:id="@+id/btnAchievements"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnOptions"
+        android:layout_below="@+id/btnHighscores"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:background="#CCCCCC"
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAchievements"
         android:layout_marginTop="22dp"
-        android:text="@string/SignIn"
+        android:text="Sign In"
         android:background="#CCCCCC" />
 
     <!-- sign-out button -->
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAchievements"
         android:layout_marginTop="22dp"
-        android:text="@string/SignOut"
+        android:text="Sign Out"
         android:background="#CCCCCC"
         android:visibility="gone" />
 

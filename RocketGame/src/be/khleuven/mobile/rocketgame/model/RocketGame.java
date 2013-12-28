@@ -11,6 +11,7 @@ public class RocketGame {
 	private int birds_hit;
 	private boolean touching;
 	private boolean playing;
+
 	
 
 	public RocketGame(){

@@ -4,7 +4,6 @@ import be.khleuven.mobile.rocketgame.R;
 
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +12,7 @@ import com.google.example.games.basegameutils.BaseGameActivity;
 
 public class MenuActivity extends BaseGameActivity {
 	public static int REQUEST_ACHIEVEMENTS = 1001;
+	public static int REQUEST_LEADERBOARD = 1002;
 
 	public void setSigninButtonState() {
 		if (isSignedIn()) {
@@ -39,13 +39,10 @@ public class MenuActivity extends BaseGameActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		Log.v("@@@@@@@@@@@@@@@", "8====>");
 
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_menu);
-
-		Log.v("@@@@@@@@@@@@@@@@", findViewById(R.id.sign_in_button).toString());
 
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
@@ -76,7 +73,16 @@ public class MenuActivity extends BaseGameActivity {
 						}
 					}
 				});
-
+		findViewById(R.id.btnHighscores).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (isSignedIn()) {
+						      startActivityForResult(getGamesClient().getLeaderboardIntent(
+						              getResources().getString(R.string.leaderboard_highest_distance_android)), REQUEST_LEADERBOARD);
+						}
+					}
+				});
 	}
 
 	@Override

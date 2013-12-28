@@ -7,6 +7,8 @@ import com.google.example.games.basegameutils.BaseGameActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -31,7 +33,7 @@ public class GameActivity extends BaseGameActivity {
 	private TimerTask refresher;
 
 	private MediaPlayer mediaplayer;
-
+	
 	private SensorManager mSensorManager;
 	private float x; // acceleration apart from gravity
 	private final SensorEventListener mSensorListener = new SensorEventListener() {
@@ -64,11 +66,17 @@ public class GameActivity extends BaseGameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
+		//AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+		//audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
+		
+		SharedPreferences prefs = this.getSharedPreferences("be.khleuven.mobile.rocketgame", Context.MODE_PRIVATE);
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		gameview = (GameView) findViewById(R.id.gameActivity1);
+		gameview.rocketgame.setMoney(prefs.getInt("money", 0));
+		gameview.rocketgame.getRocket().setFuel((prefs.getInt("fuel", 1000)));
+		gameview.rocketgame.getRocket().setEngineSpeed(prefs.getInt("engine", 30));
+		gameview.rocketgame.getRocket().setHealth(prefs.getInt("health", 100));
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mSensorManager.registerListener(mSensorListener,
 				mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
@@ -202,9 +210,23 @@ public class GameActivity extends BaseGameActivity {
 
 	}
 	
+	private void savePreferences(String key, int value) {
+		        SharedPreferences sharedPreferences = this.getSharedPreferences("be.khleuven.mobile.rocketgame", Context.MODE_PRIVATE);
+		        Editor editor = sharedPreferences.edit();
+		        editor.putInt(key, value);
+		        editor.commit();
+	}
+
+	
 	public void gameOver(View view) {
+		
+		savePreferences("money", gameview.rocketgame.getMoney());
+
+		if (isSignedIn()) {
+			getGamesClient().submitScore(getResources().getString(R.string.leaderboard_highest_distance_android), (long) gameview.rocketgame.getHeight());
+        }
 		Intent myIntent = new Intent(view.getContext(), GameOverActivity.class);
-		myIntent.putExtra("height", gameview.rocketgame.getHeight());
+		myIntent.putExtra("height", (int) gameview.rocketgame.getHeight());
 		myIntent.putExtra("money", gameview.rocketgame.getMoney());
 		startActivityForResult(myIntent, 0);
 	}
