@@ -175,7 +175,7 @@ public class GameView extends View {
 			// accelerometervariables mee te geven
 
 			p.setColor(Color.WHITE);
-
+			p.setTextSize(getResources().getDimensionPixelSize(R.dimen.myFontSize));
 			// eerste run
 			if (rocketgame.getRocket().getY() == 0) {
 				rocketgame.getRocket().setX(
