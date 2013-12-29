@@ -55,15 +55,15 @@ public class ShopActivity extends Activity {
 		moneyview.setText(text);
 		
 		health.setText(prefs.getInt("health", 100) + "");
-		next_health.setText(prefs.getInt("health", 110) + "");
+		next_health.setText(prefs.getInt("health", 100) + 10 + "");
 		health_cost.setText(prefs.getInt("health", 100)*10 + "");
 
 		fuel.setText(prefs.getInt("fuel", 1000) + "");
-		next_fuel.setText(prefs.getInt("fuel", 2000) + "");
+		next_fuel.setText(prefs.getInt("fuel", 1000)+ 1000 + "");
 		fuel_cost.setText(prefs.getInt("fuel", 1000) + "");
 		
 		engine.setText(prefs.getInt("engine",30) + "");
-		next_engine.setText(prefs.getInt("engine",40) + "");
+		next_engine.setText(prefs.getInt("engine",30) + 10 + "");
 		engine_cost.setText(prefs.getInt("engine",30)*30 + "");
 	}
 
